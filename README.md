@@ -1,1 +1,1 @@
-# react-drum-sequencer
+# React Drum Sequencer
