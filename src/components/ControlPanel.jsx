@@ -1,17 +1,32 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { SettingsContext } from '../contexts';
 
 import { ToggleButton, VolumeControl, Visualiser, TempoControl } from './';
 
 const ControlPanel = () => {
+  const {
+    isPlaying,
+    togglePlayPause,
+    isPaused,
+    togglePaused,
+    isMuted,
+    toggleMuted 
+  } = useContext(SettingsContext);
+
   return (
     <div>
-        <h2>ControlPanel</h2>
-        <ToggleButton />
-        <ToggleButton />
-        <ToggleButton />
-        <VolumeControl />
-        <Visualiser />
-        <TempoControl />
+      <h2>ControlPanel</h2>
+      <ToggleButton 
+        property={isPlaying && !isPaused}
+        toggleFunction={togglePlayPause}
+        onLabel="Pause"
+        offLabel="Play"
+      />
+      <ToggleButton />
+      <ToggleButton />
+      <VolumeControl />
+      <Visualiser />
+      <TempoControl />
     </div>
   )
 }
