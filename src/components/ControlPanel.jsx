@@ -27,7 +27,12 @@ const ControlPanel = () => {
         toggleFunction={stopPlaying}
         onLabel="Stop"
       />
-      <ToggleButton />
+      <ToggleButton 
+        property={isMuted}
+        toggleFunction={toggleMuted}
+        onLabel="Unmute"
+        offLabel="Mute"
+      />
       <VolumeControl />
       <Visualiser />
       <TempoControl />

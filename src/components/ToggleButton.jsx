@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 /**
- * Button calls passed toggleFunction on click.
+ * Button calls the toggleFunction passed to it on click.
  * If offLabel is supplied, label is based on the passed property boolean.
  */
 const ToggleButton = ({ property, toggleFunction, onLabel, offLabel  }) => {
