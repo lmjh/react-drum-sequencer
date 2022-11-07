@@ -8,7 +8,7 @@ const ControlPanel = () => {
     isPlaying,
     togglePlayPause,
     isPaused,
-    togglePaused,
+    stopPlaying,
     isMuted,
     toggleMuted 
   } = useContext(SettingsContext);
@@ -22,7 +22,11 @@ const ControlPanel = () => {
         onLabel="Pause"
         offLabel="Play"
       />
-      <ToggleButton />
+      <ToggleButton 
+        property={isPlaying}
+        toggleFunction={stopPlaying}
+        onLabel="Stop"
+      />
       <ToggleButton />
       <VolumeControl />
       <Visualiser />

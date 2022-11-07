@@ -28,8 +28,9 @@ const SettingsContextProvider = (props) => {
         }
     }
 
-    const togglePaused = () => {
-        isPaused ? setIsPaused(false) : setIsPaused(true);
+    const stopPlaying = () => {
+        setIsPlaying(false);
+        setIsPaused(false);
     }
 
     const toggleMuted = () => {
@@ -46,7 +47,7 @@ const SettingsContextProvider = (props) => {
             setGlobalVolume,
             setTempo,
             togglePlayPause,
-            togglePaused,
+            stopPlaying,
             toggleMuted
         }}>
             {props.children}
