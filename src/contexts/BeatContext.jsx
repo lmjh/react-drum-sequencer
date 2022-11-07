@@ -27,7 +27,7 @@ const BeatContextProvider = (props) => {
       });
 
     return (
-        <BeatContext.Provider value={{}}>
+        <BeatContext.Provider value={{ beat }}>
             {props.children}
         </BeatContext.Provider>
     )
