@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 /**
  * Increases and decreases the volume of the passed volume property by 20%
@@ -23,6 +24,11 @@ const VolumeControl = ({ volume, setVolume }) => {
       </div>
     </div>
   )
+}
+
+VolumeControl.propTypes = {
+  volume: PropTypes.number.isRequired,
+  setVolume: PropTypes.func.isRequired
 }
 
 export default VolumeControl;
