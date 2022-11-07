@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 export const SettingsContext = React.createContext();
 
@@ -11,7 +11,7 @@ const SettingsContextProvider = (props) => {
     const [isPaused, setIsPaused] = useState(false);
     const [isMuted, setIsMuted] = useState(false);
     const [globalVolume, setGlobalVolume] = useState(0.6)
-    const [tempo, setTempo] = useState(120)
+    const tempo = useRef(120)
 
     // declare functions to toggle global play, pause and mute settings
     const togglePlayPause = () => {
@@ -45,7 +45,6 @@ const SettingsContextProvider = (props) => {
             globalVolume,
             tempo,
             setGlobalVolume,
-            setTempo,
             togglePlayPause,
             stopPlaying,
             toggleMuted
