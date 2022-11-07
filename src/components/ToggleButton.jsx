@@ -1,8 +1,13 @@
 import React from 'react';
 
-const ToggleButton = () => {
+/**
+ * Button calls passed toggleFunction on click. Label is based on the passed property.
+ */
+const ToggleButton = ({ property, toggleFunction, onLabel, offLabel  }) => {
   return (
-    <div>ToggleButton</div>
+    <div>
+      <button onClick={toggleFunction}>{ property ? onLabel : offLabel }</button>
+    </div>
   )
 }
 
