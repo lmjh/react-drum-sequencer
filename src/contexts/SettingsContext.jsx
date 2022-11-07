@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 export const SettingsContext = React.createContext();
 
@@ -11,15 +11,26 @@ const SettingsContextProvider = (props) => {
     const [isPaused, setIsPaused] = useState(false);
     const [isMuted, setIsMuted] = useState(false);
     const [globalVolume, setGlobalVolume] = useState(0.6)
-    const [tempo, setTempo] = useState(120)
+    const tempo = useRef(120)
 
     // declare functions to toggle global play, pause and mute settings
-    const togglePlaying = () => {
-        isPlaying ? setIsPlaying(false) : setIsPlaying(true);
+    const togglePlayPause = () => {
+        if (isPlaying && !isPaused) {
+            // pause if playing and unpaused
+            setIsPaused(true);
+        } else if (isPlaying && isPaused) {
+            // unpause if playing and paused
+            setIsPaused(false);
+        } else {
+            // play and unpause if not playing
+            setIsPaused(false);
+            setIsPlaying(true);
+        }
     }
 
-    const togglePaused = () => {
-        isPaused ? setIsPaused(false) : setIsPaused(true);
+    const stopPlaying = () => {
+        setIsPlaying(false);
+        setIsPaused(false);
     }
 
     const toggleMuted = () => {
@@ -34,9 +45,8 @@ const SettingsContextProvider = (props) => {
             globalVolume,
             tempo,
             setGlobalVolume,
-            setTempo,
-            togglePlaying,
-            togglePaused,
+            togglePlayPause,
+            stopPlaying,
             toggleMuted
         }}>
             {props.children}
