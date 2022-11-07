@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
+import { BeatContext } from '../contexts';
 
-const BeatLight = () => {
+/**
+ * Provides visual indicator of current beat
+ */
+const BeatLight = ({ beatLightNum }) => {
+  const { beat } = useContext(BeatContext);
+
   return (
-    <span>[_]</span>
+    <span>[{beatLightNum === beat ? "*" : "_"}]</span>
   )
+}
+
+BeatLight.propTypes = {
+  beatLightNum: PropTypes.number.isRequired
 }
 
 export default BeatLight;

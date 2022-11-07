@@ -1,12 +1,17 @@
 import { ControlPanel, TrackPanel } from './components';
+import { SettingsContextProvider, BeatContextProvider } from './contexts';
 
 function App() {
   return (
-    <div>
-      <h1>React Drum Sequencer</h1>
-      <ControlPanel />
-      <TrackPanel />
-    </div>
+    <SettingsContextProvider>  
+      <div>
+        <h1>React Drum Sequencer</h1>
+        <ControlPanel />
+        <BeatContextProvider>
+          <TrackPanel />
+        </BeatContextProvider>
+      </div>
+    </SettingsContextProvider>
   );
 }
 
