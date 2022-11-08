@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef } from "react";
 
 export const SettingsContext = React.createContext();
 
@@ -26,32 +26,34 @@ const SettingsContextProvider = (props) => {
             setIsPaused(false);
             setIsPlaying(true);
         }
-    }
+    };
 
     const stopPlaying = () => {
         setIsPlaying(false);
         setIsPaused(false);
-    }
+    };
 
     const toggleGlobalMute = () => {
         isGlobalMuted ? setIsGlobalMuted(false) : setIsGlobalMuted(true);
-    }
+    };
 
     return (
-        <SettingsContext.Provider value={{
-            isPlaying,
-            isPaused,
-            isGlobalMuted,
-            globalVolume,
-            tempo,
-            setGlobalVolume,
-            togglePlayPause,
-            stopPlaying,
-            toggleGlobalMute
-        }}>
+        <SettingsContext.Provider
+            value={{
+                isPlaying,
+                isPaused,
+                isGlobalMuted,
+                globalVolume,
+                tempo,
+                setGlobalVolume,
+                togglePlayPause,
+                stopPlaying,
+                toggleGlobalMute,
+            }}
+        >
             {props.children}
         </SettingsContext.Provider>
-    )
-}
+    );
+};
 
 export default SettingsContextProvider;
