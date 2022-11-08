@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import { SettingsContext } from '../contexts';
 
+import { SettingsContext } from '../contexts';
 import { ToggleButton, VolumeControl, Visualiser, TempoControl } from './';
 
 const ControlPanel = () => {
@@ -9,8 +9,8 @@ const ControlPanel = () => {
     togglePlayPause,
     isPaused,
     stopPlaying,
-    isMuted,
-    toggleMuted,
+    isGlobalMuted,
+    toggleGlobalMute,
     globalVolume,
     setGlobalVolume
   } = useContext(SettingsContext);
@@ -37,8 +37,8 @@ const ControlPanel = () => {
           onLabel="Stop"
         />
         <ToggleButton
-          property={isMuted}
-          toggleFunction={toggleMuted}
+          property={isGlobalMuted}
+          toggleFunction={toggleGlobalMute}
           onLabel="Unmute"
           offLabel="Mute"
         />
