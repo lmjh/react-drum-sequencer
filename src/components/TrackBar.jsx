@@ -3,7 +3,11 @@ import PropTypes from "prop-types";
 
 import { TrackToggle } from "./";
 
-const TrackBar = ({ trackPattern, togglePatternBeat }) => {
+/**
+ * Builds and displays array of TrackToggles from the current pattern for its 
+ * parent track.
+ */
+const TrackBar = ({ trackPattern, togglePatternAtBeat }) => {
     return (
         <div>
             <div>TrackBar</div>
@@ -12,7 +16,7 @@ const TrackBar = ({ trackPattern, togglePatternBeat }) => {
                     key={index}
                     index={index}
                     active={ele}
-                    toggleFunction={togglePatternBeat}
+                    toggleFunction={togglePatternAtBeat}
                 />
             ))}
         </div>
@@ -21,7 +25,7 @@ const TrackBar = ({ trackPattern, togglePatternBeat }) => {
 
 TrackBar.propTypes = {
     trackPattern: PropTypes.array.isRequired,
-    togglePatternBeat: PropTypes.func.isRequired
+    togglePatternAtBeat: PropTypes.func.isRequired,
 };
 
 export default TrackBar;

@@ -3,6 +3,9 @@ import PropTypes from "prop-types";
 
 import { VolumeControl, ToggleButton } from "./";
 
+/**
+ * Handles volume and mute settings for its parent Track
+ */
 const TrackControlPanel = ({
     isTrackMuted,
     toggleTrackMute,

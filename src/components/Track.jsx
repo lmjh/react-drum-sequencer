@@ -5,6 +5,9 @@ import useSound from "use-sound";
 import { TrackControlPanel, TrackBar } from "./";
 import { SettingsContext, BeatContext } from "../contexts";
 
+/**
+ * Handles playback, volume and pattern functionality for each track
+ */
 const Track = ({ name, sample }) => {
     const [isTrackMuted, setIsTrackMuted] = useState(false);
     const [trackVolume, setTrackVolume] = useState(0.6);
@@ -17,6 +20,7 @@ const Track = ({ name, sample }) => {
     const { globalVolume, isGlobalMuted } = useContext(SettingsContext);
     const { beat } = useContext(BeatContext);
 
+    // calculate sample playback volume from track and global settings
     const volume =
         trackVolume *
         globalVolume *
@@ -31,7 +35,8 @@ const Track = ({ name, sample }) => {
         isTrackMuted ? setIsTrackMuted(false) : setIsTrackMuted(true);
     };
 
-    const togglePatternBeat = (beatNum) => {
+    // toggles the track pattern array between 1 and 0 at the submitted index
+    const togglePatternAtBeat = (beatNum) => {
         setTrackPattern((prevTrackPattern) => {
             let newPattern = [...prevTrackPattern];
             newPattern[beatNum] = prevTrackPattern[beatNum] ? 0 : 1;
@@ -39,6 +44,7 @@ const Track = ({ name, sample }) => {
         });
     };
 
+    // play the track sample on each selected beat
     useEffect(() => {
         if (trackPattern[beat] === 1 && beat !== prevBeat.current) {
             play();
@@ -47,7 +53,13 @@ const Track = ({ name, sample }) => {
     }, [beat, prevBeat]);
 
     return (
-        <div>
+        <div
+            style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+            }}
+        >
             <h3>{name}</h3>
             <TrackControlPanel
                 isTrackMuted={isTrackMuted}
@@ -57,7 +69,7 @@ const Track = ({ name, sample }) => {
             />
             <TrackBar
                 trackPattern={trackPattern}
-                togglePatternBeat={togglePatternBeat}
+                togglePatternAtBeat={togglePatternAtBeat}
             />
             <button onClick={play}>test audio</button>
         </div>
