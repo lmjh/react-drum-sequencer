@@ -1,3 +1,5 @@
+import React from "react";
+
 import { ControlPanel, TrackPanel } from "./components";
 import { SettingsContextProvider, BeatContextProvider } from "./contexts";
 
