@@ -1,4 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
+import PropTypes from "prop-types";
+
 import { SettingsContext } from "./SettingsContext";
 
 export const BeatContext = React.createContext();
@@ -34,6 +36,10 @@ const BeatContextProvider = (props) => {
             {props.children}
         </BeatContext.Provider>
     );
+};
+
+BeatContextProvider.propTypes = {
+    children: PropTypes.node.isRequired,
 };
 
 export default BeatContextProvider;
