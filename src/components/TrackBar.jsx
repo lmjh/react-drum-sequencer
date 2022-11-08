@@ -1,4 +1,6 @@
 import React from "react";
+import PropTypes from "prop-types";
+
 import { TrackToggle } from "./";
 
 const TrackBar = ({ trackPattern, togglePatternBeat }) => {
@@ -15,6 +17,11 @@ const TrackBar = ({ trackPattern, togglePatternBeat }) => {
             ))}
         </div>
     );
+};
+
+TrackBar.propTypes = {
+    trackPattern: PropTypes.array.isRequired,
+    togglePatternBeat: PropTypes.func.isRequired
 };
 
 export default TrackBar;
