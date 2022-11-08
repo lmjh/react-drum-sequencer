@@ -1,26 +1,18 @@
 import React from "react";
 import { TrackToggle } from "./";
 
-const TrackBar = () => {
+const TrackBar = ({ trackPattern, togglePatternBeat }) => {
     return (
         <div>
             <div>TrackBar</div>
-            <TrackToggle />
-            <TrackToggle />
-            <TrackToggle />
-            <TrackToggle />
-            <TrackToggle />
-            <TrackToggle />
-            <TrackToggle />
-            <TrackToggle />
-            <TrackToggle />
-            <TrackToggle />
-            <TrackToggle />
-            <TrackToggle />
-            <TrackToggle />
-            <TrackToggle />
-            <TrackToggle />
-            <TrackToggle />
+            {trackPattern.map((ele, index) => (
+                <TrackToggle
+                    key={index}
+                    index={index}
+                    active={ele}
+                    toggleFunction={togglePatternBeat}
+                />
+            ))}
         </div>
     );
 };

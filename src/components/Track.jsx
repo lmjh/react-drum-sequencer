@@ -12,11 +12,25 @@ const Track = () => {
 
     const { globalVolume, globalIsMuted } = useContext(SettingsContext);
 
+    const togglePatternBeat = (beatNum) => {
+        setTrackPattern((prevTrackPattern) => {
+            let newPattern = [...prevTrackPattern];
+            newPattern[beatNum] = prevTrackPattern[beatNum] ? 0 : 1;
+            console.log(prevTrackPattern[beatNum]);
+            return newPattern;
+        });
+    };
+
     return (
         <div>
             <div>Track</div>
             <TrackControlPanel />
-            <TrackBar />
+            <TrackBar
+                trackPattern={trackPattern}
+                togglePatternBeat={togglePatternBeat}
+            />
+            {trackPattern}
+            <button onClick={() => togglePatternBeat(0)}>toggle</button>
         </div>
     );
 };
