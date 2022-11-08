@@ -1,4 +1,6 @@
 import React from "react";
+import PropTypes from "prop-types";
+
 import { VolumeControl, ToggleButton } from "./";
 
 const TrackControlPanel = ({
@@ -19,6 +21,13 @@ const TrackControlPanel = ({
             <VolumeControl volume={trackVolume} setVolume={setTrackVolume} />
         </div>
     );
+};
+
+TrackControlPanel.propTypes = {
+    isTrackMuted: PropTypes.bool.isRequired,
+    toggleTrackMute: PropTypes.func.isRequired,
+    trackVolume: PropTypes.number.isRequired,
+    setTrackVolume: PropTypes.func.isRequired,
 };
 
 export default TrackControlPanel;
