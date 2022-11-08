@@ -1,11 +1,11 @@
 import React, { useState, useRef, useContext, useEffect } from "react";
+import PropTypes from "prop-types";
 import useSound from "use-sound";
 
 import { TrackControlPanel, TrackBar } from "./";
 import { SettingsContext, BeatContext } from "../contexts";
-import { bongo } from "../audio/";
 
-const Track = () => {
+const Track = ({ name, sample }) => {
     const [isTrackMuted, setIsTrackMuted] = useState(false);
     const [trackVolume, setTrackVolume] = useState(0.6);
     const [trackPattern, setTrackPattern] = useState([
@@ -23,7 +23,7 @@ const Track = () => {
         (isGlobalMuted ? 0 : 1) *
         (isTrackMuted ? 0 : 1);
 
-    const [play] = useSound(bongo, {
+    const [play] = useSound(sample, {
         volume: volume,
     });
 
@@ -35,7 +35,6 @@ const Track = () => {
         setTrackPattern((prevTrackPattern) => {
             let newPattern = [...prevTrackPattern];
             newPattern[beatNum] = prevTrackPattern[beatNum] ? 0 : 1;
-            console.log(prevTrackPattern[beatNum]);
             return newPattern;
         });
     };
@@ -49,7 +48,7 @@ const Track = () => {
 
     return (
         <div>
-            <div>Track</div>
+            <h3>{name}</h3>
             <TrackControlPanel
                 isTrackMuted={isTrackMuted}
                 toggleTrackMute={toggleTrackMute}
@@ -63,6 +62,11 @@ const Track = () => {
             <button onClick={play}>test audio</button>
         </div>
     );
+};
+
+Track.propTypes = {
+    name: PropTypes.string.isRequired,
+    sample: PropTypes.string.isRequired,
 };
 
 export default Track;
