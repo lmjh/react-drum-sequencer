@@ -1,16 +1,35 @@
-import React, { useState, useRef, useContext } from "react";
+import React, { useState, useRef, useContext, useEffect } from "react";
+import useSound from "use-sound";
 
 import { TrackControlPanel, TrackBar } from "./";
-import { SettingsContext } from "../contexts";
+import { SettingsContext, BeatContext } from "../contexts";
+import { bongo } from "../audio/";
 
 const Track = () => {
-    const [trackIsMuted, setTrackIsMuted] = useState(false);
+    const [isTrackMuted, setIsTrackMuted] = useState(false);
     const [trackVolume, setTrackVolume] = useState(0.6);
     const [trackPattern, setTrackPattern] = useState([
         1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0,
     ]);
+    const prevBeat = useRef(0);
 
-    const { globalVolume, globalIsMuted } = useContext(SettingsContext);
+    const { globalVolume, isGlobalMuted } = useContext(SettingsContext);
+    const { beat } = useContext(BeatContext);
+
+    const [play] = useSound(bongo, {
+        volume:
+            trackVolume *
+            globalVolume *
+            (isGlobalMuted ? 0 : 1) *
+            (isTrackMuted ? 0 : 1),
+    });
+
+    useEffect(() => {
+        if (trackPattern[beat] === 1 && beat !== prevBeat.current) {
+            play();
+        }
+        prevBeat.current = beat;
+    });
 
     const togglePatternBeat = (beatNum) => {
         setTrackPattern((prevTrackPattern) => {
@@ -30,7 +49,7 @@ const Track = () => {
                 togglePatternBeat={togglePatternBeat}
             />
             {trackPattern}
-            <button onClick={() => togglePatternBeat(0)}>toggle</button>
+            <button onClick={play}>test audio</button>
         </div>
     );
 };
