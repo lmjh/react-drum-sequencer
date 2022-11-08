@@ -1,12 +1,22 @@
 import React from "react";
 import { VolumeControl, ToggleButton } from "./";
 
-const TrackControlPanel = () => {
+const TrackControlPanel = ({
+    isTrackMuted,
+    toggleTrackMute,
+    trackVolume,
+    setTrackVolume,
+}) => {
     return (
         <div>
             <div>TrackControlPanel</div>
-            <ToggleButton />
-            <VolumeControl />
+            <ToggleButton
+                property={isTrackMuted}
+                toggleFunction={toggleTrackMute}
+                onLabel="Unmute"
+                offLabel="Mute"
+            />
+            <VolumeControl volume={trackVolume} setVolume={setTrackVolume} />
         </div>
     );
 };
