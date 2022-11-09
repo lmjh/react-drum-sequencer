@@ -12,8 +12,8 @@ const BeatContextProvider = (props) => {
     const [beat, setBeat] = useState(-1);
     const { isPlaying, isPaused, tempo } = useContext(SettingsContext);
 
-    // time between beats (in milliseconds) is 60,000 divided by tempo (in beats per minute)
-    const beatLength = 60000 / tempo.current;
+    // time between quarter beats (in milliseconds) is 15,000 divided by tempo (in beats per minute)
+    const beatLength = 15000 / tempo.current;
 
     useEffect(() => {
         // set beat to -1 if stopped

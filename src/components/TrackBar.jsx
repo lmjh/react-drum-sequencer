@@ -1,28 +1,31 @@
 import React from "react";
+import PropTypes from "prop-types";
+
 import { TrackToggle } from "./";
 
-const TrackBar = () => {
+/**
+ * Builds and displays array of TrackToggles from the current pattern for its 
+ * parent track.
+ */
+const TrackBar = ({ trackPattern, togglePatternAtBeat }) => {
     return (
         <div>
             <div>TrackBar</div>
-            <TrackToggle />
-            <TrackToggle />
-            <TrackToggle />
-            <TrackToggle />
-            <TrackToggle />
-            <TrackToggle />
-            <TrackToggle />
-            <TrackToggle />
-            <TrackToggle />
-            <TrackToggle />
-            <TrackToggle />
-            <TrackToggle />
-            <TrackToggle />
-            <TrackToggle />
-            <TrackToggle />
-            <TrackToggle />
+            {trackPattern.map((ele, index) => (
+                <TrackToggle
+                    key={index}
+                    index={index}
+                    active={ele}
+                    toggleFunction={togglePatternAtBeat}
+                />
+            ))}
         </div>
     );
+};
+
+TrackBar.propTypes = {
+    trackPattern: PropTypes.array.isRequired,
+    togglePatternAtBeat: PropTypes.func.isRequired,
 };
 
 export default TrackBar;
