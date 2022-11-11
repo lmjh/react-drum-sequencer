@@ -11,9 +11,7 @@ import { SettingsContext, BeatContext } from "../contexts";
 const Track = ({ name, sample }) => {
     const [isTrackMuted, setIsTrackMuted] = useState(false);
     const [trackVolume, setTrackVolume] = useState(0.6);
-    const [trackPattern, setTrackPattern] = useState([
-        1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0,
-    ]);
+    const [trackPattern, setTrackPattern] = useState(new Array(16).fill(0));
 
     const prevBeat = useRef(0);
 

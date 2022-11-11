@@ -10,9 +10,9 @@ const TempoControl = () => {
     const [displayTempo, setDisplayTempo] = useState(tempo.current);
 
     const increment = (step) => {
-        tempo.current + step < 301
+        tempo.current + step < 201
             ? (tempo.current += step)
-            : (tempo.current = 300);
+            : (tempo.current = 200);
         setDisplayTempo(tempo.current);
     };
 
