@@ -12,7 +12,7 @@ const SettingsContextProvider = (props) => {
     const [isPaused, setIsPaused] = useState(false);
     const [isGlobalMuted, setIsGlobalMuted] = useState(false);
     const [globalVolume, setGlobalVolume] = useState(0.6);
-    const tempo = useRef(120);
+    const tempo = useRef(90);
 
     // declare functions to toggle global play, pause and mute settings
     const togglePlayPause = () => {
