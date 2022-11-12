@@ -2,7 +2,7 @@ import React, { useState, useRef, useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 import useSound from "use-sound";
 
-import { TrackControlPanel, TrackBar } from "./";
+import { ActionButton, TrackControlPanel, TrackBar } from "./";
 import { SettingsContext, BeatContext } from "../contexts";
 
 /**
@@ -42,6 +42,11 @@ const Track = ({ name, sample }) => {
         });
     };
 
+    // toggles the track pattern array between 1 and 0 at the submitted index
+    const clearPattern = () => {
+        setTrackPattern((prevTrackPattern) => prevTrackPattern.fill(0));
+    };
+
     // play the track sample on each selected beat
     useEffect(() => {
         if (trackPattern[beat] === 1 && beat !== prevBeat.current) {
@@ -65,6 +70,7 @@ const Track = ({ name, sample }) => {
                 trackVolume={trackVolume}
                 setTrackVolume={setTrackVolume}
             />
+            <ActionButton actionFunction={clearPattern} label="Clear" />
             <TrackBar
                 trackPattern={trackPattern}
                 togglePatternAtBeat={togglePatternAtBeat}
