@@ -29,6 +29,14 @@ const Track = ({ name, sample }) => {
         volume: volume,
     });
 
+    // play the track sample on each selected beat
+    useEffect(() => {
+        if (trackPattern[beat] === 1 && beat !== prevBeat.current) {
+            play();
+        }
+        prevBeat.current = beat;
+    }, [beat, prevBeat]);
+
     const toggleTrackMute = () => {
         isTrackMuted ? setIsTrackMuted(false) : setIsTrackMuted(true);
     };
@@ -42,18 +50,29 @@ const Track = ({ name, sample }) => {
         });
     };
 
-    // toggles the track pattern array between 1 and 0 at the submitted index
+    // clears track pattern array
     const clearPattern = () => {
         setTrackPattern((prevTrackPattern) => prevTrackPattern.fill(0));
     };
 
-    // play the track sample on each selected beat
-    useEffect(() => {
-        if (trackPattern[beat] === 1 && beat !== prevBeat.current) {
-            play();
-        }
-        prevBeat.current = beat;
-    }, [beat, prevBeat]);
+    const toggleSetOfBeats = (interval) => {
+        let anyChanged = false;
+        setTrackPattern((prevTrackPattern) => {
+            let newPattern = [...prevTrackPattern];
+            for (let i = 0; i < newPattern.length; i += interval) {
+                if (newPattern[i] === 0) {
+                    newPattern[i] = 1;
+                    anyChanged = true;
+                }
+            }
+            if (!anyChanged) {
+                for (let i = 0; i < newPattern.length; i += interval) {
+                    newPattern[i] = 0;
+                }
+            }
+            return newPattern;
+        });
+    };
 
     return (
         <div
@@ -71,6 +90,24 @@ const Track = ({ name, sample }) => {
                 setTrackVolume={setTrackVolume}
             />
             <ActionButton actionFunction={clearPattern} label="Clear" />
+            <ActionButton
+                actionFunction={() => {
+                    toggleSetOfBeats(4);
+                }}
+                label="X4"
+            />
+            <ActionButton
+                actionFunction={() => {
+                    toggleSetOfBeats(2);
+                }}
+                label="X8"
+            />
+            <ActionButton
+                actionFunction={() => {
+                    toggleSetOfBeats(1);
+                }}
+                label="X16"
+            />
             <TrackBar
                 trackPattern={trackPattern}
                 togglePatternAtBeat={togglePatternAtBeat}
