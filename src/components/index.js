@@ -1,3 +1,4 @@
+export { default as ActionButton } from "./ActionButton";
 export { default as BeatBar } from "./BeatBar";
 export { default as BeatLight } from "./BeatLight";
 export { default as ControlPanel } from "./ControlPanel";
