@@ -1,7 +1,13 @@
 import React, { useContext } from "react";
 
 import { SettingsContext } from "../contexts";
-import { ToggleButton, VolumeControl, Visualiser, TempoControl } from "./";
+import {
+    ActionButton,
+    TempoControl,
+    ToggleButton,
+    Visualiser,
+    VolumeControl,
+} from "./";
 
 const ControlPanel = () => {
     const {
@@ -31,10 +37,9 @@ const ControlPanel = () => {
                     onLabel="Pause"
                     offLabel="Play"
                 />
-                <ToggleButton
-                    property={isPlaying}
-                    toggleFunction={stopPlaying}
-                    onLabel="Stop"
+                <ActionButton
+                    actionFunction={stopPlaying}
+                    label="Stop"
                 />
                 <ToggleButton
                     property={isGlobalMuted}
