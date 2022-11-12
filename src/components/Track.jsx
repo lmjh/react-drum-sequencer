@@ -52,7 +52,7 @@ const Track = ({ name, sample }) => {
 
     // clears track pattern array
     const clearPattern = () => {
-        setTrackPattern((prevTrackPattern) => prevTrackPattern.fill(0));
+        setTrackPattern(new Array(16).fill(0));
     };
 
     const toggleSetOfBeats = (offset, interval) => {
