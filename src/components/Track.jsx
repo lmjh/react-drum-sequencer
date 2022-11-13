@@ -2,7 +2,7 @@ import React, { useState, useRef, useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 import useSound from "use-sound";
 
-import { ActionButton, TrackControlPanel, TrackBar } from "./";
+import { TrackControlPanel, TrackBar } from "./";
 import { SettingsContext, BeatContext } from "../contexts";
 
 /**
@@ -75,87 +75,21 @@ const Track = ({ name, sample }) => {
     };
 
     return (
-        <div
-            style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-            }}
-        >
-            <h3>{name}</h3>
+        <>
             <TrackControlPanel
+                name={name}
                 isTrackMuted={isTrackMuted}
                 toggleTrackMute={toggleTrackMute}
                 trackVolume={trackVolume}
                 setTrackVolume={setTrackVolume}
+                toggleSetOfBeats={toggleSetOfBeats}
+                clearPattern={clearPattern}
             />
-            <div>
-                <div
-                    style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                    }}
-                >
-                    <ActionButton
-                        actionFunction={() => {
-                            toggleSetOfBeats(0, 8);
-                        }}
-                        label="X2"
-                    />
-                    <ActionButton
-                        actionFunction={() => {
-                            toggleSetOfBeats(0, 4);
-                        }}
-                        label="X4"
-                    />
-                    <ActionButton
-                        actionFunction={() => {
-                            toggleSetOfBeats(0, 2);
-                        }}
-                        label="X8"
-                    />
-                    <ActionButton
-                        actionFunction={() => {
-                            toggleSetOfBeats(0, 1);
-                        }}
-                        label="X16"
-                    />
-                </div>
-                <div
-                    style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                    }}
-                >
-                    <ActionButton
-                        actionFunction={() => {
-                            toggleSetOfBeats(1, 8);
-                        }}
-                        label="X2"
-                    />
-                    <ActionButton
-                        actionFunction={() => {
-                            toggleSetOfBeats(1, 4);
-                        }}
-                        label="X4"
-                    />
-                    <ActionButton
-                        actionFunction={() => {
-                            toggleSetOfBeats(1, 2);
-                        }}
-                        label="X8"
-                    />
-                    <ActionButton actionFunction={clearPattern} label="X0" />
-                </div>
-            </div>
             <TrackBar
                 trackPattern={trackPattern}
                 togglePatternAtBeat={togglePatternAtBeat}
             />
-            <button onClick={play}>test audio</button>
-        </div>
+        </>
     );
 };
 
