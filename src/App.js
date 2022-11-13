@@ -6,13 +6,13 @@ import { SettingsContextProvider, BeatContextProvider } from "./contexts";
 function App() {
     return (
         <SettingsContextProvider>
-            <div>
-                <h1>React Drum Sequencer</h1>
+            <main className="appMainContainer">
+                <h1 className="title">React Drum Sequencer</h1>
                 <ControlPanel />
                 <BeatContextProvider>
                     <TrackPanel />
                 </BeatContextProvider>
-            </div>
+            </main>
         </SettingsContextProvider>
     );
 }

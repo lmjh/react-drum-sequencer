@@ -18,13 +18,10 @@ const VolumeControl = ({ volume, setVolume }) => {
     };
 
     return (
-        <div>
-            <div>VolumeControl</div>
-            <div>
-                <button onClick={decrement}>-</button>
-                {volume}
-                <button onClick={increment}>+</button>
-            </div>
+        <div className="volumeControl">
+            <button onClick={decrement}>-</button>
+            {volume}
+            <button onClick={increment}>+</button>
         </div>
     );
 };

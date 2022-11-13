@@ -80,7 +80,7 @@ const Visualiser = () => {
         };
     }, [isPlaying]);
 
-    return <canvas ref={canvasRef} id="visualiser" width="300px" height="150px" />;
+    return <canvas ref={canvasRef} id="visualiser" className="visualiser" />;
 };
 
 export default Visualiser;

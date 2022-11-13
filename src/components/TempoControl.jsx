@@ -24,15 +24,12 @@ const TempoControl = () => {
     };
 
     return (
-        <div>
-            <div>Tempo</div>
-            <div>
-                <button onClick={() => decrement(10)}>--</button>
-                <button onClick={() => decrement(1)}>-</button>
-                {displayTempo}
-                <button onClick={() => increment(1)}>+</button>
-                <button onClick={() => increment(10)}>++</button>
-            </div>
+        <div className="tempoControl">
+            <button onClick={() => decrement(10)}>--</button>
+            <button onClick={() => decrement(1)}>-</button>
+            {displayTempo}
+            <button onClick={() => increment(1)}>+</button>
+            <button onClick={() => increment(10)}>++</button>
         </div>
     );
 };

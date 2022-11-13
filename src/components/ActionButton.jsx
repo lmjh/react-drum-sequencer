@@ -6,9 +6,9 @@ import PropTypes from "prop-types";
  */
 const ActionButton = ({ actionFunction, label }) => {
     return (
-        <div>
-            <button onClick={actionFunction}>{label}</button>
-        </div>
+        <button onClick={actionFunction} className="actionButton">
+            {label}
+        </button>
     );
 };
 

@@ -11,7 +11,7 @@ const TrackToggle = ({ index, active, toggleFunction }) => {
     const beat = useContext(BeatContext);
 
     return (
-        <button onClick={() => toggleFunction(index)}>
+        <button onClick={() => toggleFunction(index)} className="trackToggle">
             {index === beat.beat ? "[0]" : active ? "[*]" : "[_]"}
         </button>
     );

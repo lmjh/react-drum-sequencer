@@ -9,8 +9,7 @@ import { TrackToggle } from "./";
  */
 const TrackBar = ({ trackPattern, togglePatternAtBeat }) => {
     return (
-        <div>
-            <div>TrackBar</div>
+        <div className="trackBar">
             {trackPattern.map((ele, index) => (
                 <TrackToggle
                     key={index}

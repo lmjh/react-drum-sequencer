@@ -10,8 +10,7 @@ const BeatBar = () => {
         .map((_ele, index) => <BeatLight key={index} beatLightNum={index} />);
 
     return (
-        <div>
-            <div>BeatBar</div>
+        <div className="beatBar">
             {beatArray}
         </div>
     );

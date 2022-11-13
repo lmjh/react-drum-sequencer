@@ -7,11 +7,9 @@ import PropTypes from "prop-types";
  */
 const ToggleButton = ({ property, toggleFunction, onLabel, offLabel }) => {
     return (
-        <div>
-            <button onClick={toggleFunction}>
-                {offLabel ? (property ? onLabel : offLabel) : onLabel}
-            </button>
-        </div>
+        <button onClick={toggleFunction} className="toggleButton">
+            {offLabel ? (property ? onLabel : offLabel) : onLabel}
+        </button>
     );
 };
 
