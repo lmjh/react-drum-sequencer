@@ -43,13 +43,13 @@ const Visualiser = () => {
                 // configure visualiser style
                 context.fillStyle = "#101010";
                 context.lineWidth = 2;
-                context.strokeStyle = "#36fe2c";
+                context.strokeStyle = "#27beff";
 
                 // get data
                 analyser.current.getByteTimeDomainData(dataArray);
 
-                // fill background and start line path 
-                context.fillRect(0, 0, width, height);
+                // fill background and start line path
+                context.clearRect(0, 0, width, height);
                 context.beginPath();
 
                 // iterate over data and draw to canvas
@@ -80,7 +80,17 @@ const Visualiser = () => {
         };
     }, [isPlaying]);
 
-    return <canvas ref={canvasRef} id="visualiser" className="visualiser" />;
+    return (
+        <div className="visualiserContainer">
+            <div className="visualiserContainerInner">
+                <canvas
+                    ref={canvasRef}
+                    id="visualiser"
+                    className="visualiser"
+                />
+            </div>
+        </div>
+    );
 };
 
 export default Visualiser;

@@ -95,7 +95,7 @@ code {
 
 .globalVolumeControl {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
     height: 80%;
 }
@@ -196,9 +196,39 @@ code {
 
 .visualiser {
     width: 100%;
-    max-height: 100px;
+    height: 100%;
+    border-radius: 25px;
+    background-image: linear-gradient(
+            rgba(71, 212, 255, 0.05) 1px,
+            transparent 1px
+        ),
+        linear-gradient(to right, rgba(71, 212, 255, 0.05) 1px, transparent 1px);
+    background-size: 10px 10px;
+    background-color: rgba(71, 212, 255, 0);
 }
 
+.visualiserContainer {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    background: linear-gradient(#404040, #202020);
+    border-radius: 25px;
+    box-shadow: 0 3px 5px #151515;
+    margin: 5px 0;
+}
+
+.visualiserContainerInner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(0deg, #000801 0%, #00262c 47%, #100b00 100%);
+    width: 95%;
+    max-height: 85%;
+    border-radius: 25px;
+    overflow: hidden;
+}
 /* BEAT BAR STYLES */
 
 .beatBar {
