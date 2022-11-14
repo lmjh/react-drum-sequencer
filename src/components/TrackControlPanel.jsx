@@ -19,36 +19,36 @@ const TrackControlPanel = ({
         <section className="trackControlPanel">
             <h2 className="trackName">{name}</h2>
 
-            <ActionButton
-                actionFunction={() => {
-                    toggleSetOfBeats(0, 8);
-                }}
-                label="X2"
-            />
-            <ActionButton
-                actionFunction={() => {
-                    toggleSetOfBeats(0, 4);
-                }}
-                label="X4"
-            />
-            <ActionButton
-                actionFunction={() => {
-                    toggleSetOfBeats(0, 2);
-                }}
-                label="X8"
-            />
-            <ActionButton
-                actionFunction={() => {
-                    toggleSetOfBeats(0, 1);
-                }}
-                label="X16"
-            />
-
             <ToggleButton
                 property={isTrackMuted}
                 toggleFunction={toggleTrackMute}
                 onLabel="Unmute"
                 offLabel="M"
+            />
+
+            <ActionButton
+                actionFunction={() => {
+                    toggleSetOfBeats(0, 8);
+                }}
+                label="x2"
+            />
+            <ActionButton
+                actionFunction={() => {
+                    toggleSetOfBeats(0, 4);
+                }}
+                label="x4"
+            />
+            <ActionButton
+                actionFunction={() => {
+                    toggleSetOfBeats(0, 2);
+                }}
+                label="x8"
+            />
+            <ActionButton
+                actionFunction={() => {
+                    toggleSetOfBeats(0, 1);
+                }}
+                label="x16"
             />
             <VolumeControl
                 className="trackVolumeControl"
@@ -60,21 +60,21 @@ const TrackControlPanel = ({
                 actionFunction={() => {
                     toggleSetOfBeats(1, 8);
                 }}
-                label="X2"
+                label="x2"
             />
             <ActionButton
                 actionFunction={() => {
                     toggleSetOfBeats(1, 4);
                 }}
-                label="X4"
+                label="x4"
             />
             <ActionButton
                 actionFunction={() => {
                     toggleSetOfBeats(1, 2);
                 }}
-                label="X8"
+                label="x8"
             />
-            <ActionButton actionFunction={clearPattern} label="X0" />
+            <ActionButton actionFunction={clearPattern} label="x0" />
         </section>
     );
 };
