@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 /**
  * Increases and decreases the volume of the passed volume property by 20%
  */
-const VolumeControl = ({ volume, setVolume }) => {
+const VolumeControl = ({ volume, setVolume, className }) => {
     const increment = () => {
         volume < 0.8
             ? setVolume((prevVol) => Math.floor(prevVol * 10 + 2) / 10)
@@ -18,7 +18,7 @@ const VolumeControl = ({ volume, setVolume }) => {
     };
 
     return (
-        <div className="volumeControl">
+        <div className={className}>
             <button onClick={decrement}>-</button>
             {volume}
             <button onClick={increment}>+</button>
@@ -29,6 +29,7 @@ const VolumeControl = ({ volume, setVolume }) => {
 VolumeControl.propTypes = {
     volume: PropTypes.number.isRequired,
     setVolume: PropTypes.func.isRequired,
+    className: PropTypes.string.isRequired,
 };
 
 export default VolumeControl;

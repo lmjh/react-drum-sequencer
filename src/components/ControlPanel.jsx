@@ -36,7 +36,11 @@ const ControlPanel = () => {
                 onLabel="Unmute"
                 offLabel="Mute"
             />
-            <VolumeControl volume={globalVolume} setVolume={setGlobalVolume} />
+            <VolumeControl
+                className="globalVolumeControl"
+                volume={globalVolume}
+                setVolume={setGlobalVolume}
+            />
             <Visualiser />
             <TempoControl />
         </section>
