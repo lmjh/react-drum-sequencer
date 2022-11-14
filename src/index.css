@@ -1,130 +1,227 @@
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #202020;
-  color: #ebebeb;
-  display: flex;
-  justify-content: center;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+        "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+        "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #151515;
+    color: #ebebeb;
+    display: flex;
+    justify-content: center;
 }
 
 #root {
-  width: 80%;
-
+    width: 100%;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+        monospace;
 }
 
 .appMainContainer {
-  display: grid;
-  grid-template-columns: 1fr 5fr;
-  grid-gap: 10px;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-gap: 10px;
 }
 
 .title {
-  grid-column-start: 1;
-  grid-column-end: 3;
-  justify-self: center;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    justify-self: center;
 }
 
 .controlPanel {
-  grid-column-start: 2;
-  grid-column-end: 3;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr) 3fr 5fr 3fr;
-  grid-gap: 10px;
-  align-items: center;
-  background-color: #303030;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr) 3fr 5fr 3fr;
+    grid-gap: 10px;
+    align-items: center;
+    background-color: #303030;
 }
 
 .toggleButton {
-  aspect-ratio: 1;
-  border-radius: 10%;
+    aspect-ratio: 1;
+    border-radius: 10%;
 }
 
 .actionButton {
-  aspect-ratio: 1;
-  border-radius: 10%;
+    aspect-ratio: 1;
+    border-radius: 10%;
 }
 
-.trackToggle {
-  aspect-ratio: 1;
-  border-radius: 10%;
-}
-
-.volumeControl {
-  display: flex;
-  justify-content: center;
+.globalVolumeControl {
+    display: flex;
+    justify-content: center;
 }
 
 .tempoControl {
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
 }
 
 .visualiser {
-  width: 100%;
-  max-height: 100px;
+    width: 100%;
+    max-height: 100px;
 }
 
 .beatBar {
-  grid-column-start: 2;
-  grid-column-end: 3;
-  justify-self: center;
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(16, 1fr);
-  grid-gap: 10px;
-  align-items: center;
-  background-color: #303030;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    display: grid;
+    grid-template-columns: repeat(16, 1fr);
+    grid-gap: 5px;
+    align-items: center;
+}
+
+.beatLight {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.beatLightActive {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #27beff;
+    box-shadow: 0px 0px 6px #27beff;
+}
+
+.beatLightInactive {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #1a1a1a;
+    box-shadow: inset 0 -2px 5px #0f0f0f, inset 0 2px 5px #262626;
 }
 
 .trackBar {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(16, 1fr);
-  grid-gap: 10px;
-  align-items: center;
-  background-color: #303030;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-gap: 5px;
+    align-items: center;
+    background-color: #151515;
+    border-radius: 10px;
 }
 
-/* .controlPanel {
-  width: 80%;
-  display: flex;
-  column-gap: 20px;
-  justify-content: end;
-  align-items: center;
+.trackControlPanel {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 2px;
+    align-items: center;
+    background-color: #303030;
 }
 
-.toggleButton {
-  flex: 1 0 auto;
-  aspect-ratio: 1 / 1 ;
+.trackName {
+    font-size: 1rem;
+    text-align: center;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    margin: 0;
 }
 
-.actionButton {
-  flex: 1 0 auto;
-  aspect-ratio: 1 / 1 ;
+.trackVolumeControl {
+    grid-column-start: 2;
+    grid-column-end: 4;
+    display: flex;
+    justify-content: center;
 }
 
-.trackToggle {
-  flex: 1 0 auto;
-  aspect-ratio: 1 / 1 ;
+.trackToggleDark {
+    cursor: pointer;
+    padding: 0;
+    aspect-ratio: 1;
+    border-radius: 25%;
+    border: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background: linear-gradient(0deg, #202020, #404040);
+    box-shadow: 0px 5px 9px #101010;
 }
 
-.volumeControl {
-  flex: 2 0 auto;
+.trackToggleInnerDark {
+    aspect-ratio: 1;
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    color: #666666;
+    border-radius: 50%;
+    border: 0px;
+    background: linear-gradient(180deg, #202020, #404040);
 }
 
-.tempoControl {
-  flex: 2 0 auto;
+.trackToggleRed {
+    cursor: pointer;
+    padding: 0;
+    aspect-ratio: 1;
+    border-radius: 25%;
+    border: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background: linear-gradient(180deg, #c42e2e, #7e1c1c);
+    box-shadow: 0px 5px 9px #101010;
 }
 
-.visualiser {
-  flex: 2 0 auto;
-  border-radius: 10px;
-} */
+.trackToggleInnerRed {
+    aspect-ratio: 1;
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    color: #666666;
+    border-radius: 50%;
+    border: 0px;
+    background: linear-gradient(180deg, #7e1c1c, #c42e2e);
+}
+
+.light-button {
+    color: #666666;
+    border-radius: 50%;
+    border: 1px solid #1a1a1a;
+    background: linear-gradient(0deg, #202020, #404040);
+    box-shadow: 0px 5px 4px #151515;
+}
+
+.beatActive {
+    background-color: #ffad27;
+    box-shadow: 0px 0px 4px #ffad27;
+    height: 30%;
+    width: 30%;
+    border-radius: 50%;
+}
+
+.beatCurrent {
+    background-color: #27beff;
+    box-shadow: 0px 0px 4px #27beff;
+    height: 30%;
+    width: 30%;
+    border-radius: 50%;
+}
+
+.beatInactive {
+    border-radius: 7px;
+    background: #191919;
+    box-shadow: inset 1px 1px 2px #141414, inset -1px -1px 2px #2c2c2c;
+    height: 30%;
+    width: 30%;
+    border-radius: 50%;
+}
+
+@media (min-width: 992px) {
+    #root {
+        width: 90%;
+    }
+    .trackBar {
+        grid-template-columns: repeat(16, 1fr);
+    }
+}
