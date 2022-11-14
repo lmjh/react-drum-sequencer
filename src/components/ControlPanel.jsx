@@ -29,7 +29,7 @@ const ControlPanel = () => {
                 onLabel="Pause"
                 offLabel="Play"
             />
-            <ActionButton actionFunction={stopPlaying} label="Stop" />
+            <ActionButton actionFunction={stopPlaying} label="Stop" className="actionButton" innerClassName="actionButtonInner"/>
             <ToggleButton
                 property={isGlobalMuted}
                 toggleFunction={toggleGlobalMute}
