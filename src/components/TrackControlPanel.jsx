@@ -24,6 +24,8 @@ const TrackControlPanel = ({
                 toggleFunction={toggleTrackMute}
                 onLabel="Unmute"
                 offLabel="M"
+                onIcon="fa-volume-high"
+                offIcon="fa-volume-xmark"
             />
 
             <ActionButton
