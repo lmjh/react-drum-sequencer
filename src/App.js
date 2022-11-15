@@ -3,6 +3,17 @@ import React from "react";
 import { ControlPanel, TrackPanel } from "./components";
 import { SettingsContextProvider, BeatContextProvider } from "./contexts";
 
+import { library } from "@fortawesome/fontawesome-svg-core";
+import {
+    faPlay,
+    faPause,
+    faStop,
+    faVolumeXmark,
+    faVolumeHigh,
+} from "@fortawesome/free-solid-svg-icons";
+
+library.add(faPlay, faPause, faStop, faVolumeXmark, faVolumeHigh);
+
 function App() {
     return (
         <SettingsContextProvider>
