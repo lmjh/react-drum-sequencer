@@ -41,8 +41,8 @@ const ControlPanel = () => {
                 volume={globalVolume}
                 setVolume={setGlobalVolume}
             />
-            <Visualiser />
             <TempoControl />
+            <Visualiser />
         </section>
     );
 };
