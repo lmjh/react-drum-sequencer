@@ -30,9 +30,16 @@ const ControlPanel = () => {
                 offIcon="fa-play"
                 onLabel="Pause"
                 offLabel="Play"
-                className="controlPanelToggle" innerClassName="controlPanelToggleInner"
+                className="controlPanelToggle"
+                innerClassName="controlPanelToggleInner"
             />
-            <ActionButton actionFunction={stopPlaying} label="Stop" className="actionButton" innerClassName="actionButtonInner"/>
+            <ActionButton
+                actionFunction={stopPlaying}
+                icon="fa-stop"
+                label="Stop"
+                className="actionButton"
+                innerClassName="actionButtonInner"
+            />
             <ToggleButton
                 property={isGlobalMuted}
                 toggleFunction={toggleGlobalMute}
@@ -40,7 +47,8 @@ const ControlPanel = () => {
                 offIcon="fa-volume-xmark"
                 onLabel="Unmute"
                 offLabel="Mute"
-                className="controlPanelToggle" innerClassName="controlPanelToggleInner"
+                className="controlPanelToggle"
+                innerClassName="controlPanelToggleInner"
             />
             <VolumeControl
                 className="globalVolumeControl"
