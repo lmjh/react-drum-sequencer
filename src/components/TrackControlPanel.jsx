@@ -1,15 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { VolumeControl, ToggleButton, ActionButton } from "./";
+import { VolumeControl, ActionButton } from "./";
 
 /**
  * Handles volume and mute settings for its parent Track
  */
 const TrackControlPanel = ({
     name,
-    isTrackMuted,
-    toggleTrackMute,
     trackVolume,
     setTrackVolume,
     toggleSetOfBeats,
@@ -18,15 +16,6 @@ const TrackControlPanel = ({
     return (
         <section className="trackControlPanel">
             <h2 className="trackName">{name}</h2>
-
-            <ToggleButton
-                property={isTrackMuted}
-                toggleFunction={toggleTrackMute}
-                onLabel="Unmute"
-                offLabel="M"
-                onIcon="fa-volume-high"
-                offIcon="fa-volume-xmark"
-            />
 
             <ActionButton
                 actionFunction={() => {
