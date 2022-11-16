@@ -8,7 +8,15 @@ import { BeatContext } from "../contexts";
 const BeatLight = ({ beatLightNum }) => {
     const { beat } = useContext(BeatContext);
 
-    return <span>[{beatLightNum === beat ? "*" : "_"}]</span>;
+    return (
+        <span className="beatLight">
+            <span
+                className={
+                    beatLightNum === beat ? "beatLightActive" : "beatLightInactive"
+                }
+            ></span>
+        </span>
+    );
 };
 
 BeatLight.propTypes = {

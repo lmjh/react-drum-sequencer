@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { SettingsContext } from "../contexts";
+import ActionButton from "./ActionButton";
 
 /**
  * Sets global tempo setting from user input.
@@ -24,15 +25,36 @@ const TempoControl = () => {
     };
 
     return (
-        <div>
-            <div>Tempo</div>
-            <div>
-                <button onClick={() => decrement(10)}>--</button>
-                <button onClick={() => decrement(1)}>-</button>
-                {displayTempo}
-                <button onClick={() => increment(1)}>+</button>
-                <button onClick={() => increment(10)}>++</button>
+        <div className="tempoControl">
+            <div className="tempoDisplay">
+                <div className="tempoDisplayInner">
+                    {displayTempo}
+                </div>
             </div>
+            <ActionButton
+                label="<<"
+                actionFunction={() => decrement(10)}
+                className="tempoButton"
+                innerClassName={tempo.current > 40 ? "tempoButtonInner" : "tempoButtonInnerInactive"}
+            />
+            <ActionButton
+                label="<"
+                actionFunction={() => decrement(1)}
+                className="tempoButton"
+                innerClassName={tempo.current > 40 ? "tempoButtonInner" : "tempoButtonInnerInactive"}
+            />
+            <ActionButton
+                label=">"
+                actionFunction={() => increment(1)}
+                className="tempoButton"
+                innerClassName={tempo.current < 200 ? "tempoButtonInner" : "tempoButtonInnerInactive"}
+            />
+            <ActionButton
+                label=">>"
+                actionFunction={() => increment(10)}
+                className="tempoButton"
+                innerClassName={tempo.current < 200 ? "tempoButtonInner" : "tempoButtonInnerInactive"}
+            />
         </div>
     );
 };

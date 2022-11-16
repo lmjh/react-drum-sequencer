@@ -22,39 +22,42 @@ const ControlPanel = () => {
     } = useContext(SettingsContext);
 
     return (
-        <div>
-            <h2>ControlPanel</h2>
-            <div
-                style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                }}
-            >
-                <ToggleButton
-                    property={isPlaying && !isPaused}
-                    toggleFunction={togglePlayPause}
-                    onLabel="Pause"
-                    offLabel="Play"
-                />
-                <ActionButton
-                    actionFunction={stopPlaying}
-                    label="Stop"
-                />
-                <ToggleButton
-                    property={isGlobalMuted}
-                    toggleFunction={toggleGlobalMute}
-                    onLabel="Unmute"
-                    offLabel="Mute"
-                />
-                <VolumeControl
-                    volume={globalVolume}
-                    setVolume={setGlobalVolume}
-                />
-                <Visualiser />
-                <TempoControl />
-            </div>
-        </div>
+        <section className="controlPanel">
+            <ToggleButton
+                property={isPlaying && !isPaused}
+                toggleFunction={togglePlayPause}
+                onIcon="fa-pause"
+                offIcon="fa-play"
+                onLabel="Pause"
+                offLabel="Play"
+                className="controlPanelToggle playButton"
+                innerClassName="controlPanelToggleInner"
+            />
+            <ActionButton
+                actionFunction={stopPlaying}
+                icon="fa-stop"
+                label="Stop"
+                className="actionButton stopButton"
+                innerClassName="actionButtonInner"
+            />
+            <ToggleButton
+                property={isGlobalMuted}
+                toggleFunction={toggleGlobalMute}
+                onIcon="fa-volume-high"
+                offIcon="fa-volume-xmark"
+                onLabel="Unmute"
+                offLabel="Mute"
+                className="controlPanelToggle muteButton"
+                innerClassName="controlPanelToggleInner"
+            />
+            <VolumeControl
+                className="globalVolumeControl"
+                volume={globalVolume}
+                setVolume={setGlobalVolume}
+            />
+            <TempoControl />
+            <Visualiser />
+        </section>
     );
 };
 
