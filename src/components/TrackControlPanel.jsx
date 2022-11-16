@@ -15,7 +15,9 @@ const TrackControlPanel = ({
 }) => {
     return (
         <section className="trackControlPanel">
-            <h2 className="trackName">{name}</h2>
+            <div className="trackName">
+                <h2 className="trackNameInner">{name}</h2>
+            </div>
 
             <ActionButton
                 actionFunction={() => {
