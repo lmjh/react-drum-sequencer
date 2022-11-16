@@ -13,6 +13,7 @@ const Visualiser = () => {
 
     const analyser = useRef(null);
     const canvasRef = useRef(null);
+    const containerRef = useRef(null);
     const getFrame = useRef(null);
 
     useEffect(() => {
@@ -33,15 +34,21 @@ const Visualiser = () => {
             // assign canvas, context and canvas dimensions to constants
             const canvas = canvasRef.current;
             const context = canvas.getContext("2d");
-            const width = canvas.width;
-            const height = canvas.height;
+
+            // get current width and height of parent container 
+            const width = containerRef.current.offsetWidth; 
+            const height = containerRef.current.offsetHeight;
+
+            // if canvas is not same size as container, update canvas size
+            if (canvas.width != width) canvas.width = width;
+            if (canvas.height != height) canvas.height = height;
 
             const draw = () => {
                 // use requestAnimationFrame to loop over data
                 getFrame.current = requestAnimationFrame(draw);
 
                 // configure visualiser style
-                context.fillStyle = "#101010";
+                context.fillStyle = "#27beff";
                 context.lineWidth = 2;
                 context.strokeStyle = "#27beff";
 
@@ -82,7 +89,7 @@ const Visualiser = () => {
 
     return (
         <div className="visualiserContainer">
-            <div className="visualiserContainerInner">
+            <div ref={containerRef} className="visualiserContainerInner">
                 <canvas
                     ref={canvasRef}
                     id="visualiser"
