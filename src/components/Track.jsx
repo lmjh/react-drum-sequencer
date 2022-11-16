@@ -8,7 +8,7 @@ import { SettingsContext, BeatContext } from "../contexts";
 /**
  * Handles playback, volume and pattern functionality for each track
  */
-const Track = ({ name, sample }) => {
+const Track = ({ name, sample, divider }) => {
     const [isTrackMuted, setIsTrackMuted] = useState(false);
     const [trackVolume, setTrackVolume] = useState(0.6);
     const [trackPattern, setTrackPattern] = useState(new Array(16).fill(0));
@@ -89,6 +89,7 @@ const Track = ({ name, sample }) => {
                 trackPattern={trackPattern}
                 togglePatternAtBeat={togglePatternAtBeat}
             />
+            {divider ? <hr className="trackDivider" /> : <></>}
         </>
     );
 };
@@ -96,6 +97,7 @@ const Track = ({ name, sample }) => {
 Track.propTypes = {
     name: PropTypes.string.isRequired,
     sample: PropTypes.string.isRequired,
+    divider: PropTypes.bool.isRequired,
 };
 
 export default Track;

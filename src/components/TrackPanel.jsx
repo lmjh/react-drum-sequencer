@@ -13,14 +13,12 @@ const TrackPanel = () => {
         <>
             <BeatBar />
             {samples.map((sample, index) => (
-                <>
-                    <Track
-                        key={sample.name}
-                        name={sample.name}
-                        sample={sample.sample}
-                    />
-                    {index < (samples.length - 1) ? <hr className="trackDivider"/> : ""}
-                </>
+                <Track
+                    key={sample.name}
+                    name={sample.name}
+                    sample={sample.sample}
+                    divider={index < samples.length - 1}
+                />
             ))}
         </>
     );
