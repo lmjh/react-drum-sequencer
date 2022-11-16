@@ -32,25 +32,33 @@ const TrackControlPanel = ({
                 actionFunction={() => {
                     toggleSetOfBeats(0, 8);
                 }}
-                label="x2"
+                label="2"
+                className="patternShortcut patternShortcutLeft"
+                innerClassName="patternShortcutInner patternShortcutLeft"
             />
             <ActionButton
                 actionFunction={() => {
                     toggleSetOfBeats(0, 4);
                 }}
-                label="x4"
+                label="4"
+                className="patternShortcut"
+                innerClassName="patternShortcutInner"
             />
             <ActionButton
                 actionFunction={() => {
                     toggleSetOfBeats(0, 2);
                 }}
-                label="x8"
+                label="8"
+                className="patternShortcut"
+                innerClassName="patternShortcutInner"
             />
             <ActionButton
                 actionFunction={() => {
                     toggleSetOfBeats(0, 1);
                 }}
-                label="x16"
+                label="16"
+                className="patternShortcut patternShortcutRight"
+                innerClassName="patternShortcutInner patternShortcutRight"
             />
             <VolumeControl
                 className="trackVolumeControl"
@@ -62,21 +70,33 @@ const TrackControlPanel = ({
                 actionFunction={() => {
                     toggleSetOfBeats(1, 8);
                 }}
-                label="x2"
+                label="2"
+                className="patternShortcut patternShortcutLeft"
+                innerClassName="patternShortcutInner patternShortcutLeft"
             />
             <ActionButton
                 actionFunction={() => {
                     toggleSetOfBeats(1, 4);
                 }}
-                label="x4"
+                label="4"
+                className="patternShortcut"
+                innerClassName="patternShortcutInner"
             />
             <ActionButton
                 actionFunction={() => {
                     toggleSetOfBeats(1, 2);
                 }}
-                label="x8"
+                label="8"
+                className="patternShortcut"
+                innerClassName="patternShortcutInner"
             />
-            <ActionButton actionFunction={clearPattern} label="x0" />
+            <ActionButton
+                actionFunction={clearPattern}
+                label="0"
+                className="patternShortcut patternShortcutRight"
+                innerClassName="patternShortcutInner patternShortcutRight"
+                icon="fa-ban"
+            />
         </section>
     );
 };

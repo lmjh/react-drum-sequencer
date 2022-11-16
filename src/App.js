@@ -10,9 +10,10 @@ import {
     faStop,
     faVolumeXmark,
     faVolumeHigh,
+    faBan,
 } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faPlay, faPause, faStop, faVolumeXmark, faVolumeHigh);
+library.add(faPlay, faPause, faStop, faVolumeXmark, faVolumeHigh, faBan);
 
 function App() {
     return (

@@ -65,37 +65,37 @@ code {
 }
 
 .controlPanelToggle {
-  aspect-ratio: 1;
-  border-radius: 25%;
-  min-width: 25px;
-  cursor: pointer;
-  padding: 0;
-  border: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  background: linear-gradient(0deg, #202020, #404040);
-  box-shadow: 0px 5px 9px #101010;
+    aspect-ratio: 1;
+    border-radius: 25%;
+    min-width: 25px;
+    cursor: pointer;
+    padding: 0;
+    border: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background: linear-gradient(0deg, #202020, #404040);
+    box-shadow: 0px 5px 9px #101010;
 }
 
 .controlPanelToggleInner {
-  height: 85%;
-  aspect-ratio: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  border-radius: 25%;
-  border: 0px;
-  background: linear-gradient(180deg, #282828, #393939);
-  color: #27beff;
-  font-family: "Audiowide";
-  font-size: 1.5rem;
+    height: 85%;
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 25%;
+    border: 0px;
+    background: linear-gradient(180deg, #282828, #393939);
+    color: #27beff;
+    font-family: "Audiowide";
+    font-size: 1.5rem;
 }
 
 .svg-inline--fa {
-  filter: drop-shadow(0 0 5px #27beff);
+    filter: drop-shadow(0 0 5px #27beff);
 }
 
 /* ACTION BUTTON STYLES */
@@ -266,51 +266,51 @@ code {
 }
 
 .tempoButton {
-  aspect-ratio: 1;
-  border-radius: 50%;
-  min-width: 25px;
-  cursor: pointer;
-  padding: 0;
-  border: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  background: linear-gradient(0deg, #202020, #404040);
-  box-shadow: 0px 5px 9px #101010;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    min-width: 25px;
+    cursor: pointer;
+    padding: 0;
+    border: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background: linear-gradient(0deg, #202020, #404040);
+    box-shadow: 0px 5px 9px #101010;
 }
 
 .tempoButtonInner {
-  height: 80%;
-  aspect-ratio: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  border-radius: 50%;
-  border: 0px;
-  background: linear-gradient(180deg, #202020, #404040);
-  color: #27beff;
-  font-family: "Audiowide";
-  text-shadow: 0 0 5px #27beff;
-  font-size: 0.8rem;
+    height: 80%;
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 50%;
+    border: 0px;
+    background: linear-gradient(180deg, #202020, #404040);
+    color: #27beff;
+    font-family: "Audiowide";
+    text-shadow: 0 0 5px #27beff;
+    font-size: 0.8rem;
 }
 
 .tempoButtonInnerInactive {
-  height: 80%;
-  aspect-ratio: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  color: #666666;
-  border-radius: 50%;
-  border: 0px;
-  background: linear-gradient(180deg, #202020, #404040);
-  color: #191919;
-  font-family: "Audiowide";
-  text-shadow: 0 0 2px #212121;
-  font-size: 0.8rem;
+    height: 80%;
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    color: #666666;
+    border-radius: 50%;
+    border: 0px;
+    background: linear-gradient(180deg, #202020, #404040);
+    color: #191919;
+    font-family: "Audiowide";
+    text-shadow: 0 0 2px #212121;
+    font-size: 0.8rem;
 }
 
 /* VISUALISER STYLES */
@@ -484,10 +484,6 @@ code {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     grid-gap: 2px;
-    align-items: center;
-    border-top: 5px solid #27beff3b;
-    border-radius: 20px;
-    padding: 3px 0;
 }
 
 .trackName {
@@ -504,6 +500,41 @@ code {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+}
+
+.patternShortcut {
+    aspect-ratio: 1;
+    cursor: pointer;
+    padding: 0;
+    border: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: linear-gradient(0deg, #202020, #404040);
+    box-shadow: 0px 3px 6px #101010;
+}
+
+.patternShortcutInner {
+    height: 75%;
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background: linear-gradient(180deg, #282828, #393939);
+    color: #27beff;
+    font-family: "Audiowide";
+    text-shadow: 0 0 5px #27beff;
+    font-size: 12px;
+}
+
+.patternShortcutLeft {
+    border-top-left-radius: 25%;
+    border-bottom-left-radius: 25%;
+}
+
+.patternShortcutRight {
+    border-top-right-radius: 25%;
+    border-bottom-right-radius: 25%;
 }
 
 @media (min-width: 992px) {
