@@ -30,14 +30,14 @@ const ControlPanel = () => {
                 offIcon="fa-play"
                 onLabel="Pause"
                 offLabel="Play"
-                className="controlPanelToggle"
+                className="controlPanelToggle playButton"
                 innerClassName="controlPanelToggleInner"
             />
             <ActionButton
                 actionFunction={stopPlaying}
                 icon="fa-stop"
                 label="Stop"
-                className="actionButton"
+                className="actionButton stopButton"
                 innerClassName="actionButtonInner"
             />
             <ToggleButton
@@ -47,7 +47,7 @@ const ControlPanel = () => {
                 offIcon="fa-volume-xmark"
                 onLabel="Unmute"
                 offLabel="Mute"
-                className="controlPanelToggle"
+                className="controlPanelToggle muteButton"
                 innerClassName="controlPanelToggleInner"
             />
             <VolumeControl
