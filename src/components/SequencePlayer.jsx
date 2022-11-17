@@ -2,13 +2,13 @@ import React, { useContext, useState, useEffect, useRef, useMemo } from "react";
 
 import useSound from "use-sound";
 
-import { Track } from "./";
+import { Track, BeatBar } from "./";
 import { SettingsContext } from "../contexts";
 import samples from "../audio";
 
 /**
- * Tracks and iterates the current beat, plays sounds on selected beats and 
- * manages track volume and pattern state. Uses a web worker to manage time 
+ * Tracks and iterates the current beat, plays sounds on selected beats and
+ * manages track volume and pattern state. Uses a web worker to manage time
  * between beats in a separate thread.
  */
 const SequencePlayer = () => {
@@ -16,12 +16,15 @@ const SequencePlayer = () => {
     const [beat, setBeat] = useState(-1);
 
     // get global settings from context
-    const { isPlaying, isPaused, tempo, globalVolume, isGlobalMuted } = useContext(SettingsContext);
-    
+    const { isPlaying, isPaused, tempo, globalVolume, isGlobalMuted } =
+        useContext(SettingsContext);
+
     // set up constants and state for each track
     const trackNameZero = samples[0].name;
     const trackSampleZero = samples[0].sample;
-    const [trackPatternZero, setTrackPatternZero] = useState(new Array(16).fill(0));
+    const [trackPatternZero, setTrackPatternZero] = useState(
+        new Array(16).fill(0)
+    );
     const [trackVolumeZero, setTrackVolumeZero] = useState(0.6);
     const [trackPlayZero] = useSound(trackSampleZero, {
         volume: trackVolumeZero,
@@ -71,7 +74,18 @@ const SequencePlayer = () => {
     }, [timeKeeper, beat, isPaused, isPlaying]);
 
     return (
-        <div>Tracks</div>
+        <>
+            <BeatBar beat={beat} />
+            <Track
+                beat={beat}
+                trackName={trackNameZero}
+                trackPattern={trackPatternZero}
+                setTrackPattern={setTrackPatternZero}
+                trackVolume={trackVolumeZero}
+                setTrackVolume={setTrackVolumeZero}
+                divider={true}
+            />
+        </>
     );
 };
 
