@@ -1,7 +1,7 @@
 import React from "react";
 
 import { ControlPanel, SequencePlayer } from "./components";
-import { SettingsContextProvider, BeatContextProvider } from "./contexts";
+import { SettingsContextProvider } from "./contexts";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
