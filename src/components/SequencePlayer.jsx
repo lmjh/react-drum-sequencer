@@ -27,7 +27,7 @@ const SequencePlayer = () => {
     );
     const [trackVolumeZero, setTrackVolumeZero] = useState(0.6);
     const [trackPlayZero] = useSound(trackSampleZero, {
-        volume: trackVolumeZero,
+        volume: trackVolumeZero * globalVolume * (isGlobalMuted ? 0 : 1),
     });
 
     // construct webworker to keep time
@@ -64,6 +64,8 @@ const SequencePlayer = () => {
                 console.log(getTime() - lastLoop.current);
                 lastLoop.current = getTime();
                 setBeat((prev) => (prev + 1) % 16);
+                console.log(beat);
+                if (trackPatternZero[beat]) trackPlayZero();
                 if (isPlaying && !isPaused) startTimeKeeper();
             }
         };
