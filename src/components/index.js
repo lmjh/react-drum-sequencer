@@ -11,3 +11,4 @@ export { default as TrackPanel } from "./TrackPanel";
 export { default as TrackToggle } from "./TrackToggle";
 export { default as Visualiser } from "./Visualiser";
 export { default as VolumeControl } from "./VolumeControl";
+export { default as SequencePlayer } from "./SequencePlayer";
