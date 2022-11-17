@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { VolumeControl, ActionButton } from "./";
 
 /**
- * Handles volume and mute settings for its parent Track
+ * Handles volume and pattern shortcuts for its parent Track
  */
 const TrackControlPanel = ({
     name,
@@ -94,8 +94,6 @@ const TrackControlPanel = ({
 
 TrackControlPanel.propTypes = {
     name: PropTypes.string.isRequired,
-    isTrackMuted: PropTypes.bool.isRequired,
-    toggleTrackMute: PropTypes.func.isRequired,
     trackVolume: PropTypes.number.isRequired,
     setTrackVolume: PropTypes.func.isRequired,
     toggleSetOfBeats: PropTypes.func.isRequired,
