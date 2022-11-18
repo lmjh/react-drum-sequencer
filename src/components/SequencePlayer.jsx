@@ -30,6 +30,30 @@ const SequencePlayer = () => {
         volume: trackVolumeZero * globalVolume * (isGlobalMuted ? 0 : 1),
     });
 
+    const trackNameOne = samples[1].name;
+    const trackSampleOne = samples[1].sample;
+    const [trackPatternOne, setTrackPatternOne] = useState(new Array(16).fill(0));
+    const [trackVolumeOne, setTrackVolumeOne] = useState(0.6);
+    const [trackPlayOne] = useSound(trackSampleOne, {
+        volume: trackVolumeOne * globalVolume * (isGlobalMuted ? 0 : 1),
+    });
+
+    const trackNameTwo = samples[2].name;
+    const trackSampleTwo = samples[2].sample;
+    const [trackPatternTwo, setTrackPatternTwo] = useState(new Array(16).fill(0));
+    const [trackVolumeTwo, setTrackVolumeTwo] = useState(0.6);
+    const [trackPlayTwo] = useSound(trackSampleTwo, {
+        volume: trackVolumeTwo * globalVolume * (isGlobalMuted ? 0 : 1),
+    });
+
+    const trackNameThree = samples[3].name;
+    const trackSampleThree = samples[3].sample;
+    const [trackPatternThree, setTrackPatternThree] = useState(new Array(16).fill(0));
+    const [trackVolumeThree, setTrackVolumeThree] = useState(0.6);
+    const [trackPlayThree] = useSound(trackSampleThree, {
+        volume: trackVolumeThree * globalVolume * (isGlobalMuted ? 0 : 1),
+    });
+
     // construct webworker to keep time
     const timeKeeper = useMemo(
         () => new Worker("/workers/timeKeeper.js"),
@@ -37,7 +61,7 @@ const SequencePlayer = () => {
     );
 
     // calculate beat length from tempo
-    const beatLength = 15000 / tempo.current;
+    const beatLength = Math.floor(15000 / tempo.current);
 
     const startTimeKeeper = () => {
         timeKeeper.postMessage({ msg: "start", interval: beatLength });
@@ -61,11 +85,13 @@ const SequencePlayer = () => {
             if (event && event.data.msg === "beat") {
                 // temporary diagnostics
                 console.log("interval: ", beatLength);
-                console.log(getTime() - lastLoop.current);
+                console.log(beatLength - (getTime() - lastLoop.current));
                 lastLoop.current = getTime();
                 setBeat((prev) => (prev + 1) % 16);
-                console.log(beat);
                 if (trackPatternZero[beat]) trackPlayZero();
+                if (trackPatternOne[beat]) trackPlayOne();
+                if (trackPatternTwo[beat]) trackPlayTwo();
+                if (trackPatternThree[beat]) trackPlayThree();
                 if (isPlaying && !isPaused) startTimeKeeper();
             }
         };
@@ -86,6 +112,33 @@ const SequencePlayer = () => {
                 trackVolume={trackVolumeZero}
                 setTrackVolume={setTrackVolumeZero}
                 divider={true}
+            />
+            <Track
+                beat={beat}
+                trackName={trackNameOne}
+                trackPattern={trackPatternOne}
+                setTrackPattern={setTrackPatternOne}
+                trackVolume={trackVolumeOne}
+                setTrackVolume={setTrackVolumeOne}
+                divider={true}
+            />
+            <Track
+                beat={beat}
+                trackName={trackNameTwo}
+                trackPattern={trackPatternTwo}
+                setTrackPattern={setTrackPatternTwo}
+                trackVolume={trackVolumeTwo}
+                setTrackVolume={setTrackVolumeTwo}
+                divider={true}
+            />
+            <Track
+                beat={beat}
+                trackName={trackNameThree}
+                trackPattern={trackPatternThree}
+                setTrackPattern={setTrackPatternThree}
+                trackVolume={trackVolumeThree}
+                setTrackVolume={setTrackVolumeThree}
+                divider={false}
             />
         </>
     );
