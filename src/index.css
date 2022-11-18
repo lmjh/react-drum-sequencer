@@ -421,11 +421,14 @@ code {
 /* TRACK BAR STYLES */
 
 .trackBar {
-    width: 100%;
+    max-width: 100%;
     display: grid;
     grid-template-columns: repeat(8, 1fr);
-    grid-gap: 5px;
+    grid-gap: 3px;
     align-items: center;
+    background: #191919;
+    border-radius: 15px;
+    padding: 4px;
 }
 
 .trackToggleDark {
@@ -660,6 +663,10 @@ code {
 
     .trackBar {
         grid-template-columns: repeat(16, 1fr);
+        background: #191919;
+        border-radius: 12px;
+        padding: 3px;
+        align-self: center;
     }
 
     .beatBar {
@@ -668,16 +675,18 @@ code {
         display: grid;
         grid-template-columns: repeat(16, 1fr);
         grid-gap: 5px;
-        align-items: center;
         padding: 10px 0;
         border-radius: 20px;
-        border-top: 10px solid var(--blue-transparent);
-        border-bottom: 10px solid var(--blue-transparent);
+        border: 5px solid var(--blue-transparent);
     }
 }
 
 @media (min-width: 1200px) {
     .appMainContainer {
         grid-template-columns: 1fr 4fr;
+    }
+
+    .trackBar {
+        border-radius: 15px;
     }
 }
