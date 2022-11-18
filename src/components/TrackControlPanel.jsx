@@ -24,8 +24,8 @@ const TrackControlPanel = ({
                     toggleSetOfBeats(0, 8);
                 }}
                 label="2"
-                className="patternShortcut patternShortcutLeft"
-                innerClassName="patternShortcutInner patternShortcutLeft"
+                className="patternShortcut patternShortcutTopLeft"
+                innerClassName="patternShortcutInner patternShortcutTopLeft"
             />
             <ActionButton
                 actionFunction={() => {
@@ -48,8 +48,8 @@ const TrackControlPanel = ({
                     toggleSetOfBeats(0, 1);
                 }}
                 label="16"
-                className="patternShortcut patternShortcutRight"
-                innerClassName="patternShortcutInner patternShortcutRight"
+                className="patternShortcut patternShortcutTopRight"
+                innerClassName="patternShortcutInner patternShortcutTopRight"
             />
             <VolumeControl
                 className="trackVolumeControl"
@@ -62,8 +62,8 @@ const TrackControlPanel = ({
                     toggleSetOfBeats(1, 8);
                 }}
                 label="2"
-                className="patternShortcut patternShortcutLeft"
-                innerClassName="patternShortcutInner patternShortcutLeft"
+                className="patternShortcut patternShortcutBottomLeft"
+                innerClassName="patternShortcutInner patternShortcutBottomLeft"
             />
             <ActionButton
                 actionFunction={() => {
@@ -84,8 +84,8 @@ const TrackControlPanel = ({
             <ActionButton
                 actionFunction={clearPattern}
                 label="0"
-                className="patternShortcut patternShortcutRight"
-                innerClassName="patternShortcutInner patternShortcutRight"
+                className="patternShortcut patternShortcutBottomRight"
+                innerClassName="patternShortcutInner patternShortcutBottomRight"
                 icon="fa-ban"
             />
         </section>

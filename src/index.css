@@ -90,7 +90,7 @@ code {
 }
 
 .visualiserContainer {
-    order: 1;
+    order: 6;
     grid-column: 1/13;
 }
 
@@ -522,8 +522,12 @@ code {
 .trackControlPanel {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
-    grid-gap: 2px;
+    grid-gap: 4px;
     align-content: center;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px #151515;
+    padding: 5px;
+    margin: 5px 0;
 }
 
 .trackName {
@@ -584,13 +588,19 @@ code {
     border-radius: 2px;
 }
 
-.patternShortcutLeft {
+.patternShortcutTopLeft {
     border-top-left-radius: 25%;
+}
+
+.patternShortcutTopRight {
+    border-top-right-radius: 25%;
+}
+
+.patternShortcutBottomLeft {
     border-bottom-left-radius: 25%;
 }
 
-.patternShortcutRight {
-    border-top-right-radius: 25%;
+.patternShortcutBottomRight {
     border-bottom-right-radius: 25%;
 }
 
@@ -601,13 +611,13 @@ code {
         grid-gap: 10px;
         margin-top: 10px;
     }
+
     .controlPanel {
         grid-column-start: 1;
         grid-column-end: 3;
         grid-template-columns: repeat(3, 1fr) 2fr 2fr 4fr;
         padding: 5px 0;
     }
-    /* CONTROL PANEL TABLET LAYOUT */
 
     .playButton {
         order: 1;
@@ -637,6 +647,10 @@ code {
     .visualiserContainer {
         order: 6;
         grid-column: 6/7;
+    }
+
+    .trackControlPanel {
+        align-self: center;
     }
 }
 
