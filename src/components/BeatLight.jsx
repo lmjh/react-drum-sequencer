@@ -8,6 +8,7 @@ const BeatLight = ({ beatLightNum, beat }) => {
 
     return (
         <span className="beatLight">
+            {beatLightNum + 1}
             <span
                 className={
                     beatLightNum === beat ? "beatLightActive" : "beatLightInactive"
