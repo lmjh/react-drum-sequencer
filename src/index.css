@@ -27,7 +27,12 @@ body {
 }
 
 #root {
-    width: 95%;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
 
 code {
@@ -40,6 +45,7 @@ code {
     flex-direction: column;
     grid-gap: 10px;
     margin-top: 10px;
+    width: 95%;
 }
 
 .title {
@@ -529,8 +535,8 @@ code {
 .trackDivider {
     grid-column: 2 / 3;
     margin: 0;
-    border: 3px solid var(--red-transparent);
-    border-radius: 20px;
+    border: 0; /* override default styles */
+    border-top: 5px solid var(--red-transparent);
 }
 
 /* TRACK CONTROL PANEL STYLES */
@@ -618,6 +624,37 @@ code {
     border-bottom-right-radius: 25%;
 }
 
+/* FOOTER STYLES */
+
+footer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 30px;
+    font-family: "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    color: #bcbcbc;
+    line-height: 1.4rem;
+}
+
+.footerContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 90%;
+    padding: 20px 0;
+    border-top: 5px solid var(--red-transparent);
+}
+
+footer a {
+    color: var(--blue);
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: var(--blue);
+    text-decoration: underline;
+}
+
 @media (min-width: 576px) {
     .appMainContainer {
         display: grid;
@@ -670,14 +707,17 @@ code {
         align-self: center;
         margin: 0;
     }
+
+    .footerContainer {
+        flex-direction: row;
+        justify-content: space-between;
+        width: 90%;
+    }
 }
 
 @media (min-width: 992px) {
-    #root {
-        width: 90%;
-    }
-
     .appMainContainer {
+        width: 90%;
         display: grid;
         grid-template-columns: 1fr 3fr;
         grid-gap: 10px;
