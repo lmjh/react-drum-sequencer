@@ -3,6 +3,7 @@ export { default as BeatBar } from "./BeatBar";
 export { default as BeatLight } from "./BeatLight";
 export { default as ControlPanel } from "./ControlPanel";
 export { default as Footer } from "./Footer";
+export { default as Header } from "./Header";
 export { default as TempoControl } from "./TempoControl";
 export { default as ToggleButton } from "./ToggleButton";
 export { default as Track } from "./Track";

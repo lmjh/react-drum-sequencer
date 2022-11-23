@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ControlPanel, SequencePlayer, Footer } from "./components";
+import { Header, ControlPanel, SequencePlayer, Footer } from "./components";
 import { SettingsContextProvider } from "./contexts";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -19,7 +19,7 @@ function App() {
     return (
         <SettingsContextProvider>
             <main className="appMainContainer">
-                <h1 className="title">React Drum Sequencer</h1>
+                <Header />
                 <ControlPanel />
                 <SequencePlayer />
             </main>
