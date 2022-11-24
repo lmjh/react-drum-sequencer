@@ -26,8 +26,17 @@ body {
     background-attachment: fixed;
 }
 
+h1 {
+    margin: 0;
+}
+
 #root {
-    width: 95%;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
 
 code {
@@ -40,13 +49,7 @@ code {
     flex-direction: column;
     grid-gap: 10px;
     margin-top: 10px;
-}
-
-.title {
-    grid-column: 1 / 3;
-    justify-self: center;
-    color: var(--blue);
-    text-shadow: 0 0 5px var(--blue);
+    width: 95%;
 }
 
 /* MAIN CONTROL PANEL STYLES */
@@ -90,7 +93,7 @@ code {
 }
 
 .visualiserContainer {
-    order: 1;
+    order: 6;
     grid-column: 1/13;
 }
 
@@ -393,13 +396,29 @@ code {
 /* BEAT BAR STYLES */
 
 .beatBar {
-    display: none;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-column: 1/3;
+    grid-row-gap: 20px;
+    border: 5px solid var(--blue-transparent);
+    border-radius: 10px;
+    padding: 10px 0;
+    background: linear-gradient(
+                var(--blue-transparent),
+                var(--blue-transparent)
+            )
+            center/100% 2px no-repeat,
+        linear-gradient(var(--blue-transparent), var(--blue-transparent))
+            center/2px 100% no-repeat;
 }
 
 .beatLight {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
+    flex-direction: column;
+    color: var(--blue-transparent);
+    min-height: 40px;
 }
 
 .beatLightActive {
@@ -421,11 +440,14 @@ code {
 /* TRACK BAR STYLES */
 
 .trackBar {
-    width: 100%;
+    max-width: 100%;
     display: grid;
     grid-template-columns: repeat(8, 1fr);
-    grid-gap: 5px;
+    grid-gap: 3px;
     align-items: center;
+    background: #191919;
+    border-radius: 15px;
+    padding: 4px;
 }
 
 .trackToggleDark {
@@ -509,9 +531,9 @@ code {
 
 .trackDivider {
     grid-column: 2 / 3;
-    margin: 5px 0;
-    border: 3px solid var(--red-transparent);
-    border-radius: 20px;
+    margin: 0;
+    border: 0; /* override default styles */
+    border-top: 5px solid var(--red-transparent);
 }
 
 /* TRACK CONTROL PANEL STYLES */
@@ -519,8 +541,10 @@ code {
 .trackControlPanel {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
-    grid-gap: 2px;
+    grid-gap: 4px;
     align-content: center;
+    border-radius: 10px;
+    margin: 5px 0;
 }
 
 .trackName {
@@ -581,14 +605,72 @@ code {
     border-radius: 2px;
 }
 
-.patternShortcutLeft {
+.patternShortcutTopLeft {
     border-top-left-radius: 25%;
+}
+
+.patternShortcutTopRight {
+    border-top-right-radius: 25%;
+}
+
+.patternShortcutBottomLeft {
     border-bottom-left-radius: 25%;
 }
 
-.patternShortcutRight {
-    border-top-right-radius: 25%;
+.patternShortcutBottomRight {
     border-bottom-right-radius: 25%;
+}
+
+/* HEADER STYLES */
+
+.headerContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+}
+
+.title {
+    color: var(--blue);
+    text-shadow: 0 0 5px var(--blue);
+    text-align: center;
+}
+
+.logo {
+    filter: drop-shadow(0 0 5px var(--blue));
+    max-height: 2rem;
+}
+
+/* FOOTER STYLES */
+
+footer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 30px;
+    font-family: "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+        "Droid Sans", "Helvetica Neue", sans-serif;
+    color: #bcbcbc;
+    line-height: 1.4rem;
+}
+
+.footerContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 90%;
+    padding: 20px 0;
+    border-top: 5px solid var(--red-transparent);
+}
+
+footer a {
+    color: var(--blue);
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: var(--blue);
+    text-decoration: underline;
 }
 
 @media (min-width: 576px) {
@@ -598,13 +680,13 @@ code {
         grid-gap: 10px;
         margin-top: 10px;
     }
+
     .controlPanel {
         grid-column-start: 1;
         grid-column-end: 3;
         grid-template-columns: repeat(3, 1fr) 2fr 2fr 4fr;
         padding: 5px 0;
     }
-    /* CONTROL PANEL TABLET LAYOUT */
 
     .playButton {
         order: 1;
@@ -635,14 +717,46 @@ code {
         order: 6;
         grid-column: 6/7;
     }
-}
+    .beatBar {
+        grid-column: 2/3;
+    }
 
-@media (min-width: 992px) {
-    #root {
+    .trackControlPanel {
+        align-self: center;
+        margin: 0;
+    }
+
+    .footerContainer {
+        flex-direction: row;
+        justify-content: space-between;
         width: 90%;
     }
 
+    .headerContainer {
+        flex-direction: column;
+        grid-column: 1 / 2;
+        grid-row: 2 / 3;
+        align-items: center;
+        justify-content: space-evenly;
+        margin: 0;
+    }
+
+    .title {
+        color: var(--blue);
+        text-shadow: 0 0 5px var(--blue);
+        text-align: center;
+    }
+
+    .logo {
+        display: block;
+        width: 50%;
+        max-height: 200px;
+    }
+}
+
+@media (min-width: 992px) {
     .appMainContainer {
+        width: 90%;
         display: grid;
         grid-template-columns: 1fr 3fr;
         grid-gap: 10px;
@@ -660,24 +774,47 @@ code {
 
     .trackBar {
         grid-template-columns: repeat(16, 1fr);
+        background: #191919;
+        border-radius: 12px;
+        padding: 3px;
+        align-self: center;
     }
 
     .beatBar {
-        grid-column-start: 2;
-        grid-column-end: 3;
-        display: grid;
         grid-template-columns: repeat(16, 1fr);
         grid-gap: 5px;
-        align-items: center;
-        padding: 10px 0;
         border-radius: 20px;
-        border-top: 10px solid var(--blue-transparent);
-        border-bottom: 10px solid var(--blue-transparent);
+        background: linear-gradient(
+                    var(--blue-transparent),
+                    var(--blue-transparent)
+                )
+                25%/2px 100% no-repeat,
+            linear-gradient(var(--blue-transparent), var(--blue-transparent))
+                50%/2px 100% no-repeat,
+            linear-gradient(var(--blue-transparent), var(--blue-transparent))
+                75%/2px 100% no-repeat;
+    }
+
+    .headerContainer {
+        grid-column: 1 / 2;
+        grid-row: 1 / 3;
+    }
+
+    .logo {
+        width: 70%;
     }
 }
 
 @media (min-width: 1200px) {
     .appMainContainer {
         grid-template-columns: 1fr 4fr;
+    }
+
+    .trackBar {
+        border-radius: 15px;
+    }
+
+    .trackDivider {
+        margin: 5px 0;
     }
 }

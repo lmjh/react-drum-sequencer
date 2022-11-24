@@ -32,7 +32,9 @@ const SequencePlayer = () => {
 
     const trackNameOne = samples[1].name;
     const trackSampleOne = samples[1].sample;
-    const [trackPatternOne, setTrackPatternOne] = useState(new Array(16).fill(0));
+    const [trackPatternOne, setTrackPatternOne] = useState(
+        new Array(16).fill(0)
+    );
     const [trackVolumeOne, setTrackVolumeOne] = useState(0.6);
     const [trackPlayOne] = useSound(trackSampleOne, {
         volume: trackVolumeOne * globalVolume * (isGlobalMuted ? 0 : 1),
@@ -40,7 +42,9 @@ const SequencePlayer = () => {
 
     const trackNameTwo = samples[2].name;
     const trackSampleTwo = samples[2].sample;
-    const [trackPatternTwo, setTrackPatternTwo] = useState(new Array(16).fill(0));
+    const [trackPatternTwo, setTrackPatternTwo] = useState(
+        new Array(16).fill(0)
+    );
     const [trackVolumeTwo, setTrackVolumeTwo] = useState(0.6);
     const [trackPlayTwo] = useSound(trackSampleTwo, {
         volume: trackVolumeTwo * globalVolume * (isGlobalMuted ? 0 : 1),
@@ -48,7 +52,9 @@ const SequencePlayer = () => {
 
     const trackNameThree = samples[3].name;
     const trackSampleThree = samples[3].sample;
-    const [trackPatternThree, setTrackPatternThree] = useState(new Array(16).fill(0));
+    const [trackPatternThree, setTrackPatternThree] = useState(
+        new Array(16).fill(0)
+    );
     const [trackVolumeThree, setTrackVolumeThree] = useState(0.6);
     const [trackPlayThree] = useSound(trackSampleThree, {
         volume: trackVolumeThree * globalVolume * (isGlobalMuted ? 0 : 1),
@@ -71,9 +77,13 @@ const SequencePlayer = () => {
         timeKeeper.postMessage({ msg: "stop" });
     };
 
-    // temporary diagnostics
     const getTime = () => new Date().getTime();
-    const lastLoop = useRef(getTime());
+    const lastLoop = useRef(null);
+
+    // development mode metrics
+    if (process.env.NODE_ENV === "development") {
+        lastLoop.current = getTime();
+    }
 
     useEffect(() => {
         if (!isPlaying && !isPaused) {
@@ -83,16 +93,22 @@ const SequencePlayer = () => {
 
         timeKeeper.onmessage = (event) => {
             if (event && event.data.msg === "beat") {
-                // temporary diagnostics
-                console.log("interval: ", beatLength);
-                console.log(beatLength - (getTime() - lastLoop.current));
-                lastLoop.current = getTime();
                 setBeat((prev) => (prev + 1) % 16);
                 if (trackPatternZero[beat]) trackPlayZero();
                 if (trackPatternOne[beat]) trackPlayOne();
                 if (trackPatternTwo[beat]) trackPlayTwo();
                 if (trackPatternThree[beat]) trackPlayThree();
                 if (isPlaying && !isPaused) startTimeKeeper();
+
+                // development mode metrics
+                if (process.env.NODE_ENV === "development") {
+                    console.log("Interval: ", beatLength);
+                    console.log(
+                        "Beat delay: ",
+                        beatLength - (getTime() - lastLoop.current)
+                    );
+                    lastLoop.current = getTime();
+                }
             }
         };
 
