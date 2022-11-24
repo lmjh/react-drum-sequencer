@@ -4,7 +4,7 @@ function Footer() {
     return (
         <footer>
             <div className="footerContainer">
-                <div>Ⓒ 2022 Liam Hemming</div>
+                <div>Ⓒ {new Date().getFullYear()} Liam Hemming</div>
                 <div>
                     Find me on github:{" "}
                     <a
