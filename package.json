@@ -17,6 +17,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "predeploy" : "npm run build",
+    "deploy" : "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -43,5 +45,6 @@
     "eslint": "^8.27.0",
     "eslint-plugin-react": "^7.31.10",
     "gh-pages": "^4.0.0"
-  }
+  },
+  "homepage": "http://lmjh.github.io/react-drum-sequencer"
 }
