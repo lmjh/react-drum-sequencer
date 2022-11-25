@@ -62,8 +62,8 @@ const SequencePlayer = () => {
 
     // construct webworker to keep time
     const timeKeeper = useMemo(
-        () => new Worker("/workers/timeKeeper.js"),
-        ["/workers/timeKeeper.js"]
+        () => new Worker("./workers/timeKeeper.js"),
+        ["./workers/timeKeeper.js"]
     );
 
     // calculate beat length from tempo
