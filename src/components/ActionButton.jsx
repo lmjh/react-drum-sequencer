@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -12,15 +12,17 @@ const ActionButton = ({
     className,
     innerClassName,
 }) => {
+    const buttonLabel = useMemo(
+        () => (icon ? <FontAwesomeIcon icon={"fa-solid " + icon} /> : label),
+        [icon, label]
+    );
     return (
         <button
             onClick={actionFunction}
             className={className}
             aria-label={label}
         >
-            <div className={innerClassName}>
-                {icon ? <FontAwesomeIcon icon={"fa-solid " + icon}/> : label}
-            </div>
+            <div className={innerClassName}>{buttonLabel}</div>
         </button>
     );
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -16,6 +16,7 @@ const ToggleButton = ({
     className,
     innerClassName,
 }) => {
+    const icon = useMemo(() => (property ? onIcon : offIcon), [property]);
     return (
         <button
             aria-label={property ? onLabel : offLabel}
@@ -23,9 +24,7 @@ const ToggleButton = ({
             className={className}
         >
             <div className={innerClassName}>
-                <FontAwesomeIcon
-                    icon={"fa-solid " + (property ? onIcon : offIcon)}
-                />
+                <FontAwesomeIcon icon={"fa-solid " + icon} />
             </div>
         </button>
     );
