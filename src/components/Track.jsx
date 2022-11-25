@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useCallback } from "react";
 import PropTypes from "prop-types";
 
 import { TrackControlPanel, TrackBar } from "./";
 
 /**
- * Builds track control panels and track bars and handles pattern shortcut 
+ * Builds track control panels and track bars and handles pattern shortcut
  * functions for each track.
  */
 const Track = ({
@@ -17,20 +17,23 @@ const Track = ({
     divider,
 }) => {
     // toggles the track pattern array between 1 and 0 at the submitted index
-    const togglePatternAtBeat = (beatNum) => {
+    const togglePatternAtBeat = useCallback((beatNum) => {
         setTrackPattern((prevTrackPattern) => {
             let newPattern = [...prevTrackPattern];
             newPattern[beatNum] = prevTrackPattern[beatNum] ? 0 : 1;
             return newPattern;
         });
-    };
+    }, []);
 
     // clears track pattern array
-    const clearPattern = () => {
-        setTrackPattern(new Array(16).fill(0));
-    };
+    const clearPattern = useCallback(() => {
+        setTrackPattern([new Array(16).fill(0)]);
+    }, []);
 
-    const toggleSetOfBeats = (offset, interval) => {
+    // toggles a set of beats for the track, defined by the offset and interval
+    // e.g. offset 0 / interval 8 toggles the 1st and 9th of 16 beats
+    // e.g. offset 1 / interval 4 toggles the 2nd, 6th, 10th and 14th beats
+    const toggleSetOfBeats = useCallback((offset, interval) => {
         let anyChanged = false;
         setTrackPattern((prevTrackPattern) => {
             let newPattern = [...prevTrackPattern];
@@ -47,7 +50,7 @@ const Track = ({
             }
             return newPattern;
         });
-    };
+    }, []);
 
     return (
         <>

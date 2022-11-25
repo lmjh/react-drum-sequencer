@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import PropTypes from "prop-types";
 
 import { VolumeControl, ActionButton } from "./";
@@ -20,33 +20,33 @@ const TrackControlPanel = ({
             </div>
 
             <ActionButton
-                actionFunction={() => {
+                actionFunction={useCallback(() => {
                     toggleSetOfBeats(0, 8);
-                }}
+                }, [toggleSetOfBeats])}
                 label="2"
                 className="patternShortcut patternShortcutTopLeft"
                 innerClassName="patternShortcutInner patternShortcutTopLeft"
             />
             <ActionButton
-                actionFunction={() => {
+                actionFunction={useCallback(() => {
                     toggleSetOfBeats(0, 4);
-                }}
+                }, [toggleSetOfBeats])}
                 label="4"
                 className="patternShortcut"
                 innerClassName="patternShortcutInner"
             />
             <ActionButton
-                actionFunction={() => {
+                actionFunction={useCallback(() => {
                     toggleSetOfBeats(0, 2);
-                }}
+                }, [toggleSetOfBeats])}
                 label="8"
                 className="patternShortcut"
                 innerClassName="patternShortcutInner"
             />
             <ActionButton
-                actionFunction={() => {
+                actionFunction={useCallback(() => {
                     toggleSetOfBeats(0, 1);
-                }}
+                }, [toggleSetOfBeats])}
                 label="16"
                 className="patternShortcut patternShortcutTopRight"
                 innerClassName="patternShortcutInner patternShortcutTopRight"
@@ -58,25 +58,25 @@ const TrackControlPanel = ({
             />
 
             <ActionButton
-                actionFunction={() => {
+                actionFunction={useCallback(() => {
                     toggleSetOfBeats(1, 8);
-                }}
+                }, [toggleSetOfBeats])}
                 label="2"
                 className="patternShortcut patternShortcutBottomLeft"
                 innerClassName="patternShortcutInner patternShortcutBottomLeft"
             />
             <ActionButton
-                actionFunction={() => {
+                actionFunction={useCallback(() => {
                     toggleSetOfBeats(1, 4);
-                }}
+                }, [toggleSetOfBeats])}
                 label="4"
                 className="patternShortcut"
                 innerClassName="patternShortcutInner"
             />
             <ActionButton
-                actionFunction={() => {
+                actionFunction={useCallback(() => {
                     toggleSetOfBeats(1, 2);
-                }}
+                }, [toggleSetOfBeats])}
                 label="8"
                 className="patternShortcut"
                 innerClassName="patternShortcutInner"
