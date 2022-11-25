@@ -27,7 +27,7 @@ const Track = ({
 
     // clears track pattern array
     const clearPattern = useCallback(() => {
-        setTrackPattern([new Array(16).fill(0)]);
+        setTrackPattern(new Array(16).fill(0));
     }, []);
 
     // toggles a set of beats for the track, defined by the offset and interval
