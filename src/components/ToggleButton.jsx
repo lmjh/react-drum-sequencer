@@ -41,4 +41,4 @@ ToggleButton.propTypes = {
     innerClassName: PropTypes.string.isRequired,
 };
 
-export default ToggleButton;
+export default React.memo(ToggleButton);

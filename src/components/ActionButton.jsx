@@ -35,4 +35,4 @@ ActionButton.propTypes = {
     innerClassName: PropTypes.string.isRequired,
 };
 
-export default ActionButton;
+export default React.memo(ActionButton);
