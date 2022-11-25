@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import PropTypes from "prop-types";
 import ActionButton from "./ActionButton";
 
@@ -6,17 +6,17 @@ import ActionButton from "./ActionButton";
  * Increases and decreases the volume of the passed volume property by 20%
  */
 const VolumeControl = ({ volume, setVolume, className }) => {
-    const increment = () => {
+    const increment = useCallback(() => {
         volume < 0.8
             ? setVolume((prevVol) => Math.floor(prevVol * 10 + 2) / 10)
             : setVolume(1);
-    };
+    }, []);
 
-    const decrement = () => {
+    const decrement = useCallback(() => {
         volume > 0.2
             ? setVolume((prevVol) => Math.floor(prevVol * 10 - 2) / 10)
             : setVolume(0);
-    };
+    }, []);
 
     return (
         <div className={className}>
@@ -70,4 +70,4 @@ VolumeControl.propTypes = {
     className: PropTypes.string.isRequired,
 };
 
-export default VolumeControl;
+export default React.memo(VolumeControl);
