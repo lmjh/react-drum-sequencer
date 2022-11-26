@@ -100,4 +100,4 @@ TrackControlPanel.propTypes = {
     clearPattern: PropTypes.func.isRequired,
 };
 
-export default TrackControlPanel;
+export default React.memo(TrackControlPanel);
