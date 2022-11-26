@@ -5,15 +5,17 @@ import PropTypes from "prop-types";
  * Provides visual indicator of current beat
  */
 const BeatLight = ({ beatLightNum, current }) => {
-    const beatClass = useMemo(
-        () => (current ? "beatLightActive" : "beatLightInactive"),
+    const activeStyle = useMemo(
+        () => (current ? { visibility: "visible" } : { visibility: "hidden" }),
         [current]
     );
-
     return (
         <span className="beatLight">
             {beatLightNum + 1}
-            <span className={beatClass}></span>
+
+            <div className="beatLightInactive">
+                <div className="beatLightActive" style={activeStyle}></div>
+            </div>
         </span>
     );
 };
