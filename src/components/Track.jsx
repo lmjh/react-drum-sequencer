@@ -81,4 +81,4 @@ Track.propTypes = {
     divider: PropTypes.bool.isRequired,
 };
 
-export default Track;
+export default React.memo(Track);

@@ -29,4 +29,4 @@ TrackBar.propTypes = {
     beat: PropTypes.number.isRequired,
 };
 
-export default TrackBar;
+export default React.memo(TrackBar);

@@ -160,4 +160,4 @@ const SequencePlayer = () => {
     );
 };
 
-export default SequencePlayer;
+export default React.memo(SequencePlayer);
