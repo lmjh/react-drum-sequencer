@@ -14,7 +14,7 @@ const TrackBar = ({ beat, trackPattern, togglePatternAtBeat }) => {
                 <TrackToggle
                     key={index}
                     index={index}
-                    beat={beat}
+                    current={beat===index}
                     active={ele}
                     toggleFunction={togglePatternAtBeat}
                 />
