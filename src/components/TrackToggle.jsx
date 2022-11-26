@@ -7,17 +7,29 @@ import PropTypes from "prop-types";
  */
 const TrackToggle = ({ index, active, toggleFunction, current }) => {
     const toggleClass = useMemo(
-        () => index % 4 === 0 ? "trackToggleRed" : "trackToggleDark",
+        () => (index % 4 === 0 ? "trackToggleRed" : "trackToggleDark"),
         [index]
     );
     const toggleInnerClass = useMemo(
-        () => index % 4 === 0 ? "trackToggleInnerRed" : "trackToggleInnerDark",
+        () =>
+            index % 4 === 0 ? "trackToggleInnerRed" : "trackToggleInnerDark",
         [index]
     );
 
-    const beatLightClass = useMemo(
-        () => current ? "beatCurrent" : active ? "beatActive" : "beatInactive",
-        [current, active]
+    // const beatLightClass = useMemo(
+    //     () =>
+    //         current ? "beatCurrent" : active ? "beatActive" : "beatInactive",
+    //     [current, active]
+    // );
+
+    const activeStyle = useMemo(
+        () => (active ? { visibility: "visible" } : { visibility: "hidden" }),
+        [active]
+    );
+
+    const currentStyle = useMemo(
+        () => (current ? { visibility: "visible" } : { visibility: "hidden" }),
+        [current]
     );
 
     return (
@@ -26,7 +38,11 @@ const TrackToggle = ({ index, active, toggleFunction, current }) => {
             className={toggleClass}
         >
             <div className={toggleInnerClass}>
-                <div className={beatLightClass}></div>
+                <div className="beatInactive">
+                    <div className="beatActive" style={activeStyle}>
+                        <div className="beatCurrent" style={currentStyle}></div>
+                    </div>
+                </div>
             </div>
         </button>
     );
