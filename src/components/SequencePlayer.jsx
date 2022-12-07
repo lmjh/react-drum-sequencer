@@ -152,6 +152,18 @@ const SequencePlayer = () => {
         audioContext.current.resume();
     }, []);
 
+    // update gain node on volume change 
+    useEffect(() => {
+        // resume the audio context if it is suspended
+        if (audioContext.current.state === "suspended") {
+            audioContext.current.resume();
+        }
+        mainGain.current.gain.exponentialRampToValueAtTime(
+            globalVolume * (isGlobalMuted ? 0 : 1) + 0.00001,
+            audioContext.current.currentTime + 0.01
+        );
+    }, [globalVolume, isGlobalMuted]);
+
     return (
         <>
             <BeatBar beat={beat} />
