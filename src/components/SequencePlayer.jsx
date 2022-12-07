@@ -32,24 +32,28 @@ const SequencePlayer = () => {
     const trackPatternZero = useRef(new Array(16).fill(0));
     const [trackVolumeZero, setTrackVolumeZero] = useState(0.6);
     const trackBufferZero = useRef();
+    const trackGainZero = useRef();
 
     const trackNameOne = samples[1].name;
     const trackSampleOne = samples[1].sample;
     const trackPatternOne = useRef(new Array(16).fill(0));
     const [trackVolumeOne, setTrackVolumeOne] = useState(0.6);
     const trackBufferOne = useRef();
+    const trackGainOne = useRef();
 
     const trackNameTwo = samples[2].name;
     const trackSampleTwo = samples[2].sample;
     const trackPatternTwo = useRef(new Array(16).fill(0));
     const [trackVolumeTwo, setTrackVolumeTwo] = useState(0.6);
     const trackBufferTwo = useRef();
+    const trackGainTwo = useRef();
 
     const trackNameThree = samples[3].name;
     const trackSampleThree = samples[3].sample;
     const trackPatternThree = useRef(new Array(16).fill(0));
     const [trackVolumeThree, setTrackVolumeThree] = useState(0.6);
     const trackBufferThree = useRef();
+    const trackGainThree = useRef();
 
     // functions
 
@@ -67,9 +71,9 @@ const SequencePlayer = () => {
     };
 
     // plays the given sample buffer at the given time
-    const playSample = (time, buffer) => {
+    const playSample = (time, buffer, gainNode) => {
         let source = audioContext.current.createBufferSource();
-        source.connect(mainGain.current);
+        source.connect(gainNode);
         source.buffer = buffer;
         source.start(time);
     };
@@ -105,13 +109,13 @@ const SequencePlayer = () => {
             currentBeat = iterateBeat(currentBeat);
             // schedule playback of samples if the current beat is selected
             if (trackPatternZero.current[currentBeat])
-                playSample(nextBeatTime.current, trackBufferZero.current);
+                playSample(nextBeatTime.current, trackBufferZero.current, trackGainZero.current);
             if (trackPatternOne.current[currentBeat])
-                playSample(nextBeatTime.current, trackBufferOne.current);
+                playSample(nextBeatTime.current, trackBufferOne.current, trackGainOne.current);
             if (trackPatternTwo.current[currentBeat])
-                playSample(nextBeatTime.current, trackBufferTwo.current);
+                playSample(nextBeatTime.current, trackBufferTwo.current, trackGainTwo.current);
             if (trackPatternThree.current[currentBeat])
-                playSample(nextBeatTime.current, trackBufferThree.current);
+                playSample(nextBeatTime.current, trackBufferThree.current, trackGainThree.current);
             // set next beat time based on current tempo
             nextBeatTime.current += Math.floor(1500 / tempo.current) / 100;
         }
@@ -139,6 +143,17 @@ const SequencePlayer = () => {
         // create main gain node and connect to context destination
         mainGain.current = audioContext.current.createGain();
         mainGain.current.connect(audioContext.current.destination);
+
+        // create gain nodes for each track and connect to main gain
+        trackGainZero.current = audioContext.current.createGain();
+        trackGainZero.current.connect(mainGain.current);
+        trackGainOne.current = audioContext.current.createGain();
+        trackGainOne.current.connect(mainGain.current);
+        trackGainTwo.current = audioContext.current.createGain();
+        trackGainTwo.current.connect(mainGain.current);
+        trackGainThree.current = audioContext.current.createGain();
+        trackGainThree.current.connect(mainGain.current);
+
         // load samples to buffers
         loadSample(trackSampleZero, trackBufferZero);
         loadSample(trackSampleOne, trackBufferOne);
@@ -152,7 +167,7 @@ const SequencePlayer = () => {
         audioContext.current.resume();
     }, []);
 
-    // update gain node on volume change 
+    // update gain nodes on volume change
     useEffect(() => {
         // resume the audio context if it is suspended
         if (audioContext.current.state === "suspended") {
@@ -162,7 +177,30 @@ const SequencePlayer = () => {
             globalVolume * (isGlobalMuted ? 0 : 1) + 0.00001,
             audioContext.current.currentTime + 0.01
         );
-    }, [globalVolume, isGlobalMuted]);
+        trackGainZero.current.gain.exponentialRampToValueAtTime(
+            trackVolumeZero + 0.00001,
+            audioContext.current.currentTime + 0.01
+        );
+        trackGainOne.current.gain.exponentialRampToValueAtTime(
+            trackVolumeOne + 0.00001,
+            audioContext.current.currentTime + 0.01
+        );
+        trackGainTwo.current.gain.exponentialRampToValueAtTime(
+            trackVolumeTwo + 0.00001,
+            audioContext.current.currentTime + 0.01
+        );
+        trackGainThree.current.gain.exponentialRampToValueAtTime(
+            trackVolumeThree + 0.00001,
+            audioContext.current.currentTime + 0.01
+        );
+    }, [
+        globalVolume,
+        isGlobalMuted,
+        trackVolumeZero,
+        trackVolumeOne,
+        trackVolumeTwo,
+        trackVolumeThree,
+    ]);
 
     return (
         <>
