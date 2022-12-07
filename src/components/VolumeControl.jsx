@@ -10,13 +10,13 @@ const VolumeControl = ({ volume, setVolume, className }) => {
         volume < 0.8
             ? setVolume((prevVol) => Math.floor(prevVol * 10 + 2) / 10)
             : setVolume(1);
-    }, []);
+    }, [volume]);
 
     const decrement = useCallback(() => {
         volume > 0.2
             ? setVolume((prevVol) => Math.floor(prevVol * 10 - 2) / 10)
             : setVolume(0);
-    }, []);
+    }, [volume]);
 
     return (
         <div className={className}>
