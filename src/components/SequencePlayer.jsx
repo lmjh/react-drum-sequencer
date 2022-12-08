@@ -17,7 +17,7 @@ const SequencePlayer = () => {
     const [beat, setBeat] = useState(-1);
 
     // get global settings from context
-    const { isPlaying, isPaused, tempo, globalVolume, isGlobalMuted } =
+    const { isPlaying, isPaused, tempo, globalVolume, isGlobalMuted, analyser } =
         useContext(SettingsContext);
 
     // store contexts, nodes and scheduler variables in refs
@@ -109,13 +109,29 @@ const SequencePlayer = () => {
             currentBeat = iterateBeat(currentBeat);
             // schedule playback of samples if the current beat is selected
             if (trackPatternZero.current[currentBeat])
-                playSample(nextBeatTime.current, trackBufferZero.current, trackGainZero.current);
+                playSample(
+                    nextBeatTime.current,
+                    trackBufferZero.current,
+                    trackGainZero.current
+                );
             if (trackPatternOne.current[currentBeat])
-                playSample(nextBeatTime.current, trackBufferOne.current, trackGainOne.current);
+                playSample(
+                    nextBeatTime.current,
+                    trackBufferOne.current,
+                    trackGainOne.current
+                );
             if (trackPatternTwo.current[currentBeat])
-                playSample(nextBeatTime.current, trackBufferTwo.current, trackGainTwo.current);
+                playSample(
+                    nextBeatTime.current,
+                    trackBufferTwo.current,
+                    trackGainTwo.current
+                );
             if (trackPatternThree.current[currentBeat])
-                playSample(nextBeatTime.current, trackBufferThree.current, trackGainThree.current);
+                playSample(
+                    nextBeatTime.current,
+                    trackBufferThree.current,
+                    trackGainThree.current
+                );
             // set next beat time based on current tempo
             nextBeatTime.current += Math.floor(1500 / tempo.current) / 100;
         }
@@ -140,9 +156,14 @@ const SequencePlayer = () => {
     useEffect(() => {
         // create new audio context
         audioContext.current = new AudioContext();
+
         // create main gain node and connect to context destination
         mainGain.current = audioContext.current.createGain();
         mainGain.current.connect(audioContext.current.destination);
+
+        // create analyser node for visualiser and connect to main gain
+        analyser.current = audioContext.current.createAnalyser();
+        mainGain.current.connect(analyser.current);
 
         // create gain nodes for each track and connect to main gain
         trackGainZero.current = audioContext.current.createGain();
@@ -159,12 +180,12 @@ const SequencePlayer = () => {
         loadSample(trackSampleOne, trackBufferOne);
         loadSample(trackSampleTwo, trackBufferTwo);
         loadSample(trackSampleThree, trackBufferThree);
+
         // ramp gain to default global values on resumption of audio context
         mainGain.current.gain.exponentialRampToValueAtTime(
             globalVolume * (isGlobalMuted ? 0 : 1),
             audioContext.current.currentTime + 0.001
         );
-        audioContext.current.resume();
     }, []);
 
     // update gain nodes on volume change
