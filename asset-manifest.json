@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/react-drum-sequencer/static/css/main.dc00fd45.css",
-    "main.js": "/react-drum-sequencer/static/js/main.ef4bf3ad.js",
+    "main.js": "/react-drum-sequencer/static/js/main.50105899.js",
     "static/media/floortom.wav": "/react-drum-sequencer/static/media/floortom.c1f2f9d9b98e5c2122c1.wav",
     "static/media/snare.wav": "/react-drum-sequencer/static/media/snare.75d6e4001ff7bec0db59.wav",
     "static/media/bass.wav": "/react-drum-sequencer/static/media/bass.d1c23eaed50159ab5022.wav",
@@ -9,10 +9,10 @@
     "static/media/logo.svg": "/react-drum-sequencer/static/media/logo.2785610630fc33fcb4f8b4e497b667ca.svg",
     "index.html": "/react-drum-sequencer/index.html",
     "main.dc00fd45.css.map": "/react-drum-sequencer/static/css/main.dc00fd45.css.map",
-    "main.ef4bf3ad.js.map": "/react-drum-sequencer/static/js/main.ef4bf3ad.js.map"
+    "main.50105899.js.map": "/react-drum-sequencer/static/js/main.50105899.js.map"
   },
   "entrypoints": [
     "static/css/main.dc00fd45.css",
-    "static/js/main.ef4bf3ad.js"
+    "static/js/main.50105899.js"
   ]
 }
