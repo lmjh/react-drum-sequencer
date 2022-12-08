@@ -9,7 +9,13 @@ import { BeatLight } from "./";
 const BeatBar = ({ beat }) => {
     const beatArray = new Array(16)
         .fill("")
-        .map((_ele, index) => <BeatLight key={index} beatLightNum={index} beat={beat} />);
+        .map((_ele, index) => (
+            <BeatLight
+                key={index}
+                beatLightNum={index}
+                current={beat === index}
+            />
+        ));
 
     return <div className="beatBar">{beatArray}</div>;
 };

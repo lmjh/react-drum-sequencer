@@ -14,7 +14,7 @@ const TrackBar = ({ beat, trackPattern, togglePatternAtBeat }) => {
                 <TrackToggle
                     key={index}
                     index={index}
-                    beat={beat}
+                    current={beat===index}
                     active={ele}
                     toggleFunction={togglePatternAtBeat}
                 />
@@ -29,4 +29,4 @@ TrackBar.propTypes = {
     beat: PropTypes.number.isRequired,
 };
 
-export default TrackBar;
+export default React.memo(TrackBar);

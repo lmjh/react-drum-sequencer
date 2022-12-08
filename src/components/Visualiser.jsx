@@ -1,4 +1,4 @@
-import { Howler } from "howler";
+// import { Howler } from "howler";
 
 import React, { useRef, useEffect, useContext } from "react";
 import { SettingsContext } from "../contexts";
@@ -9,24 +9,14 @@ import { SettingsContext } from "../contexts";
  * developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Visualizations_with_Web_Audio_API
  */
 const Visualiser = () => {
-    const isPlaying = useContext(SettingsContext);
+    const { isPlaying, analyser } = useContext(SettingsContext);
 
-    const analyser = useRef(null);
     const canvasRef = useRef(null);
     const containerRef = useRef(null);
     const getFrame = useRef(null);
 
     useEffect(() => {
         if (isPlaying) {
-            // call a method of the Howler object to trigger creation of the
-            // audio context
-            Howler.mute(false);
-
-            // create an analyser node from the Howler global context
-            analyser.current = Howler.ctx.createAnalyser();
-            // connect the analyser to the Howler master gain node
-            Howler.masterGain.connect(analyser.current);
-
             // capture data from analyser
             const bufferLength = analyser.current.frequencyBinCount;
             const dataArray = new Uint8Array(bufferLength);
@@ -35,8 +25,8 @@ const Visualiser = () => {
             const canvas = canvasRef.current;
             const context = canvas.getContext("2d");
 
-            // get current width and height of parent container 
-            const width = containerRef.current.offsetWidth; 
+            // get current width and height of parent container
+            const width = containerRef.current.offsetWidth;
             const height = containerRef.current.offsetHeight;
 
             // if canvas is not same size as container, update canvas size
@@ -79,6 +69,31 @@ const Visualiser = () => {
             };
 
             draw();
+        } else {
+            const canvas = canvasRef.current;
+            const context = canvas.getContext("2d");
+
+            // get current width and height of parent container
+            const width = containerRef.current.offsetWidth;
+            const height = containerRef.current.offsetHeight;
+
+            // if canvas is not same size as container, update canvas size
+            if (canvas.width != width) canvas.width = width;
+            if (canvas.height != height) canvas.height = height;
+
+            // configure visualiser style
+            context.fillStyle = "#27beff";
+            context.lineWidth = 2;
+            context.strokeStyle = "#27beff";
+
+            // fill background and start line path
+            context.clearRect(0, 0, width, height);
+            context.beginPath();
+
+            // draw line across center of canvas 
+            context.moveTo(0, context.canvas.height / 2);
+            context.lineTo(context.canvas.width, context.canvas.height / 2);
+            context.stroke();
         }
         return () => {
             // cleanup on dismount

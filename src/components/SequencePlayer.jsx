@@ -1,121 +1,227 @@
-import React, { useContext, useState, useEffect, useRef, useMemo } from "react";
-
-import useSound from "use-sound";
+import React, { useContext, useState, useEffect, useRef } from "react";
 
 import { Track, BeatBar } from "./";
 import { SettingsContext } from "../contexts";
 import samples from "../audio";
 
+const AudioContext = window.AudioContext || window.webkitAudioContext;
+
 /**
  * Tracks and iterates the current beat, plays sounds on selected beats and
- * manages track volume and pattern state. Uses a web worker to manage time
- * between beats in a separate thread.
+ * manages track volume and patterns.
  */
 const SequencePlayer = () => {
+    // variables
+
     // store current beat in state
     const [beat, setBeat] = useState(-1);
 
     // get global settings from context
-    const { isPlaying, isPaused, tempo, globalVolume, isGlobalMuted } =
+    const { isPlaying, isPaused, tempo, globalVolume, isGlobalMuted, analyser } =
         useContext(SettingsContext);
+
+    // store contexts, nodes and scheduler variables in refs
+    const audioContext = useRef();
+    const mainGain = useRef();
+    const scheduleTimer = useRef();
+    const nextBeatTime = useRef();
 
     // set up constants and state for each track
     const trackNameZero = samples[0].name;
     const trackSampleZero = samples[0].sample;
-    const [trackPatternZero, setTrackPatternZero] = useState(
-        new Array(16).fill(0)
-    );
+    const trackPatternZero = useRef(new Array(16).fill(0));
     const [trackVolumeZero, setTrackVolumeZero] = useState(0.6);
-    const [trackPlayZero] = useSound(trackSampleZero, {
-        volume: trackVolumeZero * globalVolume * (isGlobalMuted ? 0 : 1),
-    });
+    const trackBufferZero = useRef();
+    const trackGainZero = useRef();
 
     const trackNameOne = samples[1].name;
     const trackSampleOne = samples[1].sample;
-    const [trackPatternOne, setTrackPatternOne] = useState(
-        new Array(16).fill(0)
-    );
+    const trackPatternOne = useRef(new Array(16).fill(0));
     const [trackVolumeOne, setTrackVolumeOne] = useState(0.6);
-    const [trackPlayOne] = useSound(trackSampleOne, {
-        volume: trackVolumeOne * globalVolume * (isGlobalMuted ? 0 : 1),
-    });
+    const trackBufferOne = useRef();
+    const trackGainOne = useRef();
 
     const trackNameTwo = samples[2].name;
     const trackSampleTwo = samples[2].sample;
-    const [trackPatternTwo, setTrackPatternTwo] = useState(
-        new Array(16).fill(0)
-    );
+    const trackPatternTwo = useRef(new Array(16).fill(0));
     const [trackVolumeTwo, setTrackVolumeTwo] = useState(0.6);
-    const [trackPlayTwo] = useSound(trackSampleTwo, {
-        volume: trackVolumeTwo * globalVolume * (isGlobalMuted ? 0 : 1),
-    });
+    const trackBufferTwo = useRef();
+    const trackGainTwo = useRef();
 
     const trackNameThree = samples[3].name;
     const trackSampleThree = samples[3].sample;
-    const [trackPatternThree, setTrackPatternThree] = useState(
-        new Array(16).fill(0)
-    );
+    const trackPatternThree = useRef(new Array(16).fill(0));
     const [trackVolumeThree, setTrackVolumeThree] = useState(0.6);
-    const [trackPlayThree] = useSound(trackSampleThree, {
-        volume: trackVolumeThree * globalVolume * (isGlobalMuted ? 0 : 1),
-    });
+    const trackBufferThree = useRef();
+    const trackGainThree = useRef();
 
-    // construct webworker to keep time
-    const timeKeeper = useMemo(
-        () => new Worker("./workers/timeKeeper.js"),
-        ["./workers/timeKeeper.js"]
-    );
+    // functions
 
-    // calculate beat length from tempo
-    const beatLength = Math.floor(15000 / tempo.current);
-
-    const startTimeKeeper = () => {
-        timeKeeper.postMessage({ msg: "start", interval: beatLength });
-    };
-
-    const stopTimeKeeper = () => {
-        timeKeeper.postMessage({ msg: "stop" });
-    };
-
-    const getTime = () => new Date().getTime();
-    const lastLoop = useRef(null);
-
-    // development mode metrics
-    if (process.env.NODE_ENV === "development") {
-        lastLoop.current = getTime();
-    }
-
-    useEffect(() => {
-        if (!isPlaying && !isPaused) {
-            setBeat(-1);
-            stopTimeKeeper();
-        }
-
-        timeKeeper.onmessage = (event) => {
-            if (event && event.data.msg === "beat") {
-                setBeat((prev) => (prev + 1) % 16);
-                if (trackPatternZero[beat]) trackPlayZero();
-                if (trackPatternOne[beat]) trackPlayOne();
-                if (trackPatternTwo[beat]) trackPlayTwo();
-                if (trackPatternThree[beat]) trackPlayThree();
-                if (isPlaying && !isPaused) startTimeKeeper();
-
-                // development mode metrics
-                if (process.env.NODE_ENV === "development") {
-                    console.log("Interval: ", beatLength);
-                    console.log(
-                        "Beat delay: ",
-                        beatLength - (getTime() - lastLoop.current)
-                    );
-                    lastLoop.current = getTime();
-                }
-            }
+    // loads drum samples into an AudioBuffer
+    const loadSample = (sampleURL, buffer) => {
+        let xhr = new XMLHttpRequest();
+        xhr.open("GET", sampleURL, true);
+        xhr.responseType = "arraybuffer";
+        xhr.onload = () => {
+            audioContext.current.decodeAudioData(xhr.response, (decoded) => {
+                buffer.current = decoded;
+            });
         };
+        xhr.send();
+    };
 
-        if (isPlaying && !isPaused) {
-            startTimeKeeper();
+    // plays the given sample buffer at the given time
+    const playSample = (time, buffer, gainNode) => {
+        let source = audioContext.current.createBufferSource();
+        source.connect(gainNode);
+        source.buffer = buffer;
+        source.start(time);
+    };
+
+    // starts the scheduler
+    const startScheduler = () => {
+        // resume the audio context if it is suspended
+        if (audioContext.current.state === "suspended") {
+            audioContext.current.resume();
         }
-    }, [timeKeeper, beat, isPaused, isPlaying]);
+        // set nextBeatTime to current audio context time and start scheduler
+        nextBeatTime.current = audioContext.current.currentTime;
+        scheduler(beat);
+    };
+
+    // stops the scheduler
+    const stopScheduler = () => {
+        clearTimeout(scheduleTimer.current);
+    };
+
+    // sets the beat context to the next beat and returns the next beat
+    const iterateBeat = (currentBeat) => {
+        let nextBeat = (currentBeat + 1) % 16;
+        setBeat(nextBeat);
+        return nextBeat;
+    };
+
+    // schedules samples to be played in consistent rhythm using the audio
+    // context currentTime
+    const scheduler = (currentBeat) => {
+        while (nextBeatTime.current < audioContext.current.currentTime + 0.1) {
+            // iterate current beat to next beat
+            currentBeat = iterateBeat(currentBeat);
+            // schedule playback of samples if the current beat is selected
+            if (trackPatternZero.current[currentBeat])
+                playSample(
+                    nextBeatTime.current,
+                    trackBufferZero.current,
+                    trackGainZero.current
+                );
+            if (trackPatternOne.current[currentBeat])
+                playSample(
+                    nextBeatTime.current,
+                    trackBufferOne.current,
+                    trackGainOne.current
+                );
+            if (trackPatternTwo.current[currentBeat])
+                playSample(
+                    nextBeatTime.current,
+                    trackBufferTwo.current,
+                    trackGainTwo.current
+                );
+            if (trackPatternThree.current[currentBeat])
+                playSample(
+                    nextBeatTime.current,
+                    trackBufferThree.current,
+                    trackGainThree.current
+                );
+            // set next beat time based on current tempo
+            nextBeatTime.current += Math.floor(1500 / tempo.current) / 100;
+        }
+        scheduleTimer.current = setTimeout(() => scheduler(currentBeat), 20);
+    };
+
+    // effects
+
+    // start/pause/stop scheduler when isPaused and isPlaying update
+    useEffect(() => {
+        if (isPlaying && !isPaused) {
+            startScheduler();
+        } else if (isPlaying && isPaused) {
+            stopScheduler();
+        } else if (!isPlaying && !isPaused) {
+            setBeat(-1);
+            stopScheduler();
+        }
+    }, [isPaused, isPlaying]);
+
+    // initialise audio context settings and load samples on component mount
+    useEffect(() => {
+        // create new audio context
+        audioContext.current = new AudioContext();
+
+        // create main gain node and connect to context destination
+        mainGain.current = audioContext.current.createGain();
+        mainGain.current.connect(audioContext.current.destination);
+
+        // create analyser node for visualiser and connect to main gain
+        analyser.current = audioContext.current.createAnalyser();
+        mainGain.current.connect(analyser.current);
+
+        // create gain nodes for each track and connect to main gain
+        trackGainZero.current = audioContext.current.createGain();
+        trackGainZero.current.connect(mainGain.current);
+        trackGainOne.current = audioContext.current.createGain();
+        trackGainOne.current.connect(mainGain.current);
+        trackGainTwo.current = audioContext.current.createGain();
+        trackGainTwo.current.connect(mainGain.current);
+        trackGainThree.current = audioContext.current.createGain();
+        trackGainThree.current.connect(mainGain.current);
+
+        // load samples to buffers
+        loadSample(trackSampleZero, trackBufferZero);
+        loadSample(trackSampleOne, trackBufferOne);
+        loadSample(trackSampleTwo, trackBufferTwo);
+        loadSample(trackSampleThree, trackBufferThree);
+
+        // ramp gain to default global values on resumption of audio context
+        mainGain.current.gain.exponentialRampToValueAtTime(
+            globalVolume * (isGlobalMuted ? 0 : 1),
+            audioContext.current.currentTime + 0.001
+        );
+    }, []);
+
+    // update gain nodes on volume change
+    useEffect(() => {
+        // resume the audio context if it is suspended
+        if (audioContext.current.state === "suspended") {
+            audioContext.current.resume();
+        }
+        mainGain.current.gain.exponentialRampToValueAtTime(
+            globalVolume * (isGlobalMuted ? 0 : 1) + 0.00001,
+            audioContext.current.currentTime + 0.01
+        );
+        trackGainZero.current.gain.exponentialRampToValueAtTime(
+            trackVolumeZero + 0.00001,
+            audioContext.current.currentTime + 0.01
+        );
+        trackGainOne.current.gain.exponentialRampToValueAtTime(
+            trackVolumeOne + 0.00001,
+            audioContext.current.currentTime + 0.01
+        );
+        trackGainTwo.current.gain.exponentialRampToValueAtTime(
+            trackVolumeTwo + 0.00001,
+            audioContext.current.currentTime + 0.01
+        );
+        trackGainThree.current.gain.exponentialRampToValueAtTime(
+            trackVolumeThree + 0.00001,
+            audioContext.current.currentTime + 0.01
+        );
+    }, [
+        globalVolume,
+        isGlobalMuted,
+        trackVolumeZero,
+        trackVolumeOne,
+        trackVolumeTwo,
+        trackVolumeThree,
+    ]);
 
     return (
         <>
@@ -124,7 +230,6 @@ const SequencePlayer = () => {
                 beat={beat}
                 trackName={trackNameZero}
                 trackPattern={trackPatternZero}
-                setTrackPattern={setTrackPatternZero}
                 trackVolume={trackVolumeZero}
                 setTrackVolume={setTrackVolumeZero}
                 divider={true}
@@ -133,7 +238,6 @@ const SequencePlayer = () => {
                 beat={beat}
                 trackName={trackNameOne}
                 trackPattern={trackPatternOne}
-                setTrackPattern={setTrackPatternOne}
                 trackVolume={trackVolumeOne}
                 setTrackVolume={setTrackVolumeOne}
                 divider={true}
@@ -142,7 +246,6 @@ const SequencePlayer = () => {
                 beat={beat}
                 trackName={trackNameTwo}
                 trackPattern={trackPatternTwo}
-                setTrackPattern={setTrackPatternTwo}
                 trackVolume={trackVolumeTwo}
                 setTrackVolume={setTrackVolumeTwo}
                 divider={true}
@@ -151,7 +254,6 @@ const SequencePlayer = () => {
                 beat={beat}
                 trackName={trackNameThree}
                 trackPattern={trackPatternThree}
-                setTrackPattern={setTrackPatternThree}
                 trackVolume={trackVolumeThree}
                 setTrackVolume={setTrackVolumeThree}
                 divider={false}
@@ -160,4 +262,4 @@ const SequencePlayer = () => {
     );
 };
 
-export default SequencePlayer;
+export default React.memo(SequencePlayer);
