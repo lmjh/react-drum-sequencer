@@ -1,4 +1,4 @@
-import React, { useContext, useState, useCallback } from "react";
+import React, { useContext, useState, useCallback, useMemo } from "react";
 import { SettingsContext } from "../contexts";
 import ActionButton from "./ActionButton";
 
@@ -29,6 +29,20 @@ const TempoControl = () => {
         [tempo]
     );
 
+    const incrementClass = useMemo(
+        () =>
+            displayTempo < 200
+                ? "tempoButtonInner"
+                : "tempoButtonInnerInactive",
+        [displayTempo]
+    );
+
+    const decrementClass = useMemo(
+        () =>
+            displayTempo > 40 ? "tempoButtonInner" : "tempoButtonInnerInactive",
+        [displayTempo]
+    );
+
     return (
         <div className="tempoControl">
             <div className="tempoDisplay">
@@ -38,41 +52,25 @@ const TempoControl = () => {
                 label="<<"
                 actionFunction={useCallback(() => decrement(10), [])}
                 className="tempoButton"
-                innerClassName={
-                    tempo.current > 40
-                        ? "tempoButtonInner"
-                        : "tempoButtonInnerInactive"
-                }
+                innerClassName={decrementClass}
             />
             <ActionButton
                 label="<"
                 actionFunction={useCallback(() => decrement(1), [])}
                 className="tempoButton"
-                innerClassName={
-                    tempo.current > 40
-                        ? "tempoButtonInner"
-                        : "tempoButtonInnerInactive"
-                }
+                innerClassName={decrementClass}
             />
             <ActionButton
                 label=">"
                 actionFunction={useCallback(() => increment(1), [])}
                 className="tempoButton"
-                innerClassName={
-                    tempo.current < 200
-                        ? "tempoButtonInner"
-                        : "tempoButtonInnerInactive"
-                }
+                innerClassName={incrementClass}
             />
             <ActionButton
                 label=">>"
                 actionFunction={useCallback(() => increment(10), [])}
                 className="tempoButton"
-                innerClassName={
-                    tempo.current < 200
-                        ? "tempoButtonInner"
-                        : "tempoButtonInnerInactive"
-                }
+                innerClassName={incrementClass}
             />
         </div>
     );

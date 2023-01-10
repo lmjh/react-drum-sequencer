@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback, useEffect } from "react";
 import PropTypes from "prop-types";
 
 export const SettingsContext = React.createContext();
@@ -14,6 +14,7 @@ const SettingsContextProvider = (props) => {
     const [globalVolume, setGlobalVolume] = useState(0.6);
     const tempo = useRef(90);
     const analyser = useRef();
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 576);
 
     // declare functions to toggle global play, pause and mute settings
     const togglePlayPause = useCallback(() => {
@@ -39,6 +40,17 @@ const SettingsContextProvider = (props) => {
         isGlobalMuted ? setIsGlobalMuted(false) : setIsGlobalMuted(true);
     }, [isGlobalMuted]);
 
+    useEffect(() => {
+        // set isMobile boolean to true if window width < 576px 
+        const checkIsMobile = () => setIsMobile(window.innerWidth < 576);
+        // add event listener to update isMobile on window resize
+        window.addEventListener("resize", checkIsMobile);
+        // cleanup listener on dismount
+        return () => {
+            window.removeEventListener("resize", checkIsMobile);
+        };
+    }, []);
+
     return (
         <SettingsContext.Provider
             value={{
@@ -48,6 +60,7 @@ const SettingsContextProvider = (props) => {
                 globalVolume,
                 tempo,
                 analyser,
+                isMobile,
                 setGlobalVolume,
                 togglePlayPause,
                 stopPlaying,

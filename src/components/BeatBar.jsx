@@ -24,4 +24,4 @@ BeatBar.propTypes = {
     beat: PropTypes.number.isRequired,
 };
 
-export default BeatBar;
+export default React.memo(BeatBar);
