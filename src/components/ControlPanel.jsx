@@ -37,8 +37,8 @@ const ControlPanel = () => {
                 actionFunction={stopPlaying}
                 icon="fa-stop"
                 label="Stop"
-                className="actionButton stopButton"
-                innerClassName="actionButtonInner"
+                className="controlPanelButton stopButton"
+                innerClassName="controlPanelButtonInner"
             />
             <ToggleButton
                 property={isGlobalMuted}
@@ -57,6 +57,21 @@ const ControlPanel = () => {
             />
             <TempoControl />
             <Visualiser />
+            <div className="buttonLabelContainer playLabelContainer">
+                <div className="controlLabel">{isPlaying && !isPaused ? "PAUSE" : "PLAY"}</div>
+            </div>
+            <div className="buttonLabelContainer stopLabelContainer">
+                <div className="controlLabel">STOP</div>
+            </div>
+            <div className="buttonLabelContainer muteLabelContainer">
+                <div className="controlLabel">{isGlobalMuted ? "UNMUTE" : "MUTE"}</div>
+            </div>
+            <div className="volumeLabelContainer">
+                <div className="controlLabel">VOL</div>
+            </div>
+            <div className="tempoLabelContainer">
+                <div className="controlLabel">TEMPO</div>
+            </div>
         </section>
     );
 };
