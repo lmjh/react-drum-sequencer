@@ -53,7 +53,6 @@ const VolumeControl = ({ volume, setVolume, className }) => {
                     )}
                 ></div>
             </div>
-            {/* {volume} */}
             <ActionButton
                 label="+"
                 actionFunction={increment}
