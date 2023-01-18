@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Header, ControlPanel, SequencePlayer, Footer } from "./components";
+import { ControlPanel, Header, HelpButton, SequencePlayer, Footer } from "./components";
 import { SettingsContextProvider } from "./contexts";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -22,6 +22,7 @@ function App() {
                 <Header />
                 <ControlPanel />
                 <SequencePlayer />
+                <HelpButton />
             </main>
             <Footer />
         </SettingsContextProvider>
