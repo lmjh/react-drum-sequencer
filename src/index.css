@@ -732,7 +732,7 @@ footer {
 .footerContainer {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: start;
     width: 90%;
     padding: 20px 0;
     border-top: 5px solid var(--red-transparent);
@@ -746,6 +746,41 @@ footer a {
 footer a:hover {
     color: var(--blue);
     text-decoration: underline;
+}
+
+.footerSpacer {
+    display: none;
+}
+
+/* HELP BUTTON STYLES */
+
+.helpButton {
+    position: fixed;
+    bottom: 0;
+    right: 2.5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top-left-radius: 10px;
+    cursor: pointer;
+    border: 0;
+    background: linear-gradient(0deg, #202020, #404040);
+    box-shadow: 0px 5px 9px #101010;
+    padding: 5px;
+    border-top-right-radius: 10px;
+}
+
+.helpButtonInner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 10px;
+    background: linear-gradient(180deg, #202020, #404040);
+    color: var(--blue);
+    text-shadow: 0 0 5px var(--blue);
+    font-size: 1.5rem;
+    padding: 10px;
+    border-top-right-radius: 10px;
 }
 
 @media (min-width: 576px) {
@@ -841,8 +876,17 @@ footer a:hover {
 
     .footerContainer {
         flex-direction: row;
-        justify-content: space-between;
+        align-items: center;
         width: 90%;
+    }
+
+    .footerSpacer {
+        display: block;
+        margin: 0 10px;
+        border-radius: 100%;
+        background-color: var(--red-transparent);
+        width: 10px;
+        height: 10px;
     }
 
     .headerContainer {
