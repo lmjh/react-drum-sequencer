@@ -5,6 +5,7 @@ function Footer() {
         <footer>
             <div className="footerContainer">
                 <div>Ⓒ {new Date().getFullYear()} Liam Hemming</div>
+                <div className="footerSpacer"></div>
                 <div>
                     Find me on github:{" "}
                     <a

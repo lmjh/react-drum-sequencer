@@ -1,6 +1,12 @@
 import React from "react";
 
-import { Header, ControlPanel, SequencePlayer, Footer } from "./components";
+import {
+    ControlPanel,
+    Header,
+    HelpButton,
+    SequencePlayer,
+    Footer,
+} from "./components";
 import { SettingsContextProvider } from "./contexts";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -12,8 +18,17 @@ import {
     faVolumeHigh,
     faBan,
 } from "@fortawesome/free-solid-svg-icons";
+import { faCircleQuestion } from "@fortawesome/free-regular-svg-icons";
 
-library.add(faPlay, faPause, faStop, faVolumeXmark, faVolumeHigh, faBan);
+library.add(
+    faPlay,
+    faPause,
+    faStop,
+    faVolumeXmark,
+    faVolumeHigh,
+    faBan,
+    faCircleQuestion
+);
 
 function App() {
     return (
@@ -23,6 +38,7 @@ function App() {
                 <ControlPanel />
                 <SequencePlayer />
             </main>
+            <HelpButton />
             <Footer />
         </SettingsContextProvider>
     );

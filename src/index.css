@@ -732,7 +732,7 @@ footer {
 .footerContainer {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: start;
     width: 90%;
     padding: 20px 0;
     border-top: 5px solid var(--red-transparent);
@@ -746,6 +746,93 @@ footer a {
 footer a:hover {
     color: var(--blue);
     text-decoration: underline;
+}
+
+.footerSpacer {
+    display: none;
+}
+
+/* HELP BUTTON STYLES */
+
+.helpButton {
+    position: fixed;
+    bottom: 0;
+    right: 2.5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top-left-radius: 10px;
+    cursor: pointer;
+    border: 0;
+    background: linear-gradient(0deg, #202020, #404040);
+    box-shadow: 0px 5px 9px #101010;
+    padding: 5px;
+    border-top-right-radius: 10px;
+}
+
+.helpButtonInner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 10px;
+    background: linear-gradient(180deg, #202020, #404040);
+    color: var(--blue);
+    text-shadow: 0 0 5px var(--blue);
+    font-size: 1.5rem;
+    padding: 10px;
+    border-top-right-radius: 10px;
+}
+
+.helpImageContainer {
+    text-align: center;
+    width: 100%;
+}
+
+.helpImage {
+    max-width: 80%;
+    max-height: 200px;
+    border-radius: 15px;
+    box-shadow: 0 5px 5px #151515;
+}
+
+.modali {
+    background-color: transparent !important;
+    color: #bcbcbc
+}
+
+.modali-body {
+    font-family: Arial, sans-serif;
+    font-size: 1.1rem;
+    height: 80vh;
+    overflow-y: scroll;
+    border-radius: 15px !important;
+    padding-bottom: 20px;
+}
+
+.modali-body p {
+    font-family: Arial, sans-serif;
+    font-size: 1.1rem;
+    margin: 5%;
+}
+
+.modali-content,
+.modali-body {
+    background-color: #202020 !important;
+}
+
+.modali-content,
+.modali {
+    border-radius: 15px;
+}
+
+.modali-close-button {
+    background-color: #202020 !important;
+    color: var(--blue) !important;
+    opacity: 0.6 !important;
+}
+
+.modali-close-button:hover {
+    opacity: 1 !important;
 }
 
 @media (min-width: 576px) {
@@ -841,8 +928,17 @@ footer a:hover {
 
     .footerContainer {
         flex-direction: row;
-        justify-content: space-between;
+        align-items: center;
         width: 90%;
+    }
+
+    .footerSpacer {
+        display: block;
+        margin: 0 10px;
+        border-radius: 100%;
+        background-color: var(--red-transparent);
+        width: 10px;
+        height: 10px;
     }
 
     .headerContainer {
