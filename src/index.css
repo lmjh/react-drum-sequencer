@@ -783,6 +783,58 @@ footer a:hover {
     border-top-right-radius: 10px;
 }
 
+.helpImageContainer {
+    text-align: center;
+    width: 100%;
+}
+
+.helpImage {
+    max-width: 80%;
+    max-height: 200px;
+    border-radius: 15px;
+    box-shadow: 0 5px 5px #151515;
+}
+
+.modali {
+    background-color: transparent !important;
+    color: #bcbcbc
+}
+
+.modali-body {
+    font-family: Arial, sans-serif;
+    font-size: 1.1rem;
+    height: 80vh;
+    overflow-y: scroll;
+    border-radius: 15px !important;
+    padding-bottom: 20px;
+}
+
+.modali-body p {
+    font-family: Arial, sans-serif;
+    font-size: 1.1rem;
+    margin: 5%;
+}
+
+.modali-content,
+.modali-body {
+    background-color: #202020 !important;
+}
+
+.modali-content,
+.modali {
+    border-radius: 15px;
+}
+
+.modali-close-button {
+    background-color: #202020 !important;
+    color: var(--blue) !important;
+    opacity: 0.6 !important;
+}
+
+.modali-close-button:hover {
+    opacity: 1 !important;
+}
+
 @media (min-width: 576px) {
     .appMainContainer {
         display: grid;
