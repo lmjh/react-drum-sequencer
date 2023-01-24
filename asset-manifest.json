@@ -1,18 +1,23 @@
 {
   "files": {
-    "main.css": "/react-drum-sequencer/static/css/main.dc00fd45.css",
-    "main.js": "/react-drum-sequencer/static/js/main.8e9dc555.js",
+    "main.css": "/react-drum-sequencer/static/css/main.9d2a0860.css",
+    "main.js": "/react-drum-sequencer/static/js/main.4ba62ebd.js",
+    "static/media/shortcuts.gif": "/react-drum-sequencer/static/media/shortcuts.e687efbf3a79880f1dff.gif",
     "static/media/floortom.wav": "/react-drum-sequencer/static/media/floortom.c1f2f9d9b98e5c2122c1.wav",
+    "static/media/volume_tempo.gif": "/react-drum-sequencer/static/media/volume_tempo.64be68019a39628622d8.gif",
     "static/media/snare.wav": "/react-drum-sequencer/static/media/snare.75d6e4001ff7bec0db59.wav",
+    "static/media/track_volume.gif": "/react-drum-sequencer/static/media/track_volume.6aacb8bff70f7adf5952.gif",
+    "static/media/playback_controls.gif": "/react-drum-sequencer/static/media/playback_controls.06e1cf44d57f071b179b.gif",
+    "static/media/select_beats.gif": "/react-drum-sequencer/static/media/select_beats.a4fecb1833e9f677b804.gif",
     "static/media/bass.wav": "/react-drum-sequencer/static/media/bass.d1c23eaed50159ab5022.wav",
     "static/media/hihat.wav": "/react-drum-sequencer/static/media/hihat.32796984a82a79fe7703.wav",
     "static/media/logo.svg": "/react-drum-sequencer/static/media/logo.2785610630fc33fcb4f8b4e497b667ca.svg",
     "index.html": "/react-drum-sequencer/index.html",
-    "main.dc00fd45.css.map": "/react-drum-sequencer/static/css/main.dc00fd45.css.map",
-    "main.8e9dc555.js.map": "/react-drum-sequencer/static/js/main.8e9dc555.js.map"
+    "main.9d2a0860.css.map": "/react-drum-sequencer/static/css/main.9d2a0860.css.map",
+    "main.4ba62ebd.js.map": "/react-drum-sequencer/static/js/main.4ba62ebd.js.map"
   },
   "entrypoints": [
-    "static/css/main.dc00fd45.css",
-    "static/js/main.8e9dc555.js"
+    "static/css/main.9d2a0860.css",
+    "static/js/main.4ba62ebd.js"
   ]
 }
