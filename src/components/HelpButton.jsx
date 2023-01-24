@@ -11,6 +11,10 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Modali, { useModali } from "modali";
 
+
+/**
+ * Button that opens a help modal with information about the app
+ */
 const HelpButton = () => {
     const [helpModal, toggleHelpModal] = useModali({
         animated: true,
