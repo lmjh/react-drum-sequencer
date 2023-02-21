@@ -2,7 +2,7 @@
 
 A simple drum sequencer built with React. 
 
-You can try the working app [here](https://lmjh.github.io/react-drum-sequencer/).
+You can try the working app [here](https://drummachine.lmjh.dev/).
 
 This was my first project using React and was built to help me learn the framework.
 
