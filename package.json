@@ -47,5 +47,5 @@
     "eslint-plugin-react": "^7.31.10",
     "gh-pages": "^4.0.0"
   },
-  "homepage": "http://lmjh.github.io/react-drum-sequencer"
+  "homepage": "http://lmjh.github.io"
 }
