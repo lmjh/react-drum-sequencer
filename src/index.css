@@ -38,8 +38,6 @@ html[data-theme='dark'] {
     --track-toggle-highlight-light: #831c1c;
     --track-toggle-shadow: 0px 5px 9px var(--control-shadow);
     --title-text: var(--primary);
-    --title-background: none;
-    --title-background-clip: none;
     --title-text-shadow: 0 0 5px var(--primary);
 }
 
@@ -80,10 +78,8 @@ html[data-theme='light'] {
     --track-toggle-highlight-dark: #888;
     --track-toggle-highlight-light: #d5d5d5;
     --track-toggle-shadow: 0px 5px 9px #3c3c3c;
-    --title-text: transparent;
-    --title-background: #252525;
-    --title-background-clip: text;
-    --title-text-shadow: 0px 5px 5px rgba(255, 255, 255, 0.3);
+    --title-text: rgba(49, 49, 49, 0.8);
+    --title-text-shadow: 0px 5px 5px #fff, 0 0 0 #000, 0px 5px 5px #fff;
 }
 
 html {
@@ -780,8 +776,6 @@ code {
 .title {
     font-size: 2.5rem;
     color: var(--title-text);
-    background: var(--title-background);
-    background-clip: var(--title-background-clip);
     text-shadow: var(--title-text-shadow);
     text-align: center;
 }
