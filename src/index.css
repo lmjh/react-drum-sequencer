@@ -811,11 +811,16 @@ footer {
 
 .footerContainer {
     display: flex;
-    flex-direction: column;
-    justify-content: start;
+    justify-content: space-between;
     width: 90%;
     padding: 20px 0;
     border-top: 5px solid var(--overlay-secondary);
+}
+
+.footerTextContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
 }
 
 footer a {
@@ -830,6 +835,42 @@ footer a:hover {
 
 .footerSpacer {
     display: none;
+}
+
+/* FOOTER BUTTON STYLES */
+
+.footerControls {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    min-width: 80px;
+    grid-gap: 5px;
+}
+
+.footerButton {
+    cursor: pointer;
+    padding: 0;
+    aspect-ratio: 1;
+    border-radius: 25%;
+    border: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background: linear-gradient(0deg, var(--button-gradient-dark), var(--button-gradient-light));
+    box-shadow: var(--track-toggle-shadow);
+}
+
+.footerButtonInner {
+    aspect-ratio: 1;
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 50%;
+    border: 0px;
+    background: linear-gradient(180deg, var(--button-gradient-dark), var(--button-gradient-light));
+    color: var(--control-label)
 }
 
 /* HELP BUTTON STYLES */
@@ -915,6 +956,9 @@ footer a:hover {
     opacity: 1 !important;
 }
 
+.modali-open {
+    padding-right: 0px!important;
+}
 
 @media (min-width: 576px) {
     .appMainContainer {
@@ -1007,10 +1051,9 @@ footer a:hover {
         margin: 0;
     }
 
-    .footerContainer {
+    .footerTextContainer {
         flex-direction: row;
         align-items: center;
-        width: 90%;
     }
 
     .footerSpacer {
@@ -1090,6 +1133,10 @@ footer a:hover {
 
     .logo {
         width: 70%;
+    }
+
+    .modali-open {
+        padding-right: 16px!important;
     }
 }
 
