@@ -8,7 +8,9 @@ import {
     volumeTempo,
 } from "../images/";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ActionButton from "./ActionButton";
+
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Modali, { useModali } from "modali";
 
 
@@ -22,15 +24,13 @@ const HelpButton = () => {
     });
     return (
         <>
-            <button
-                className="helpButton"
-                aria-label="Open help modal"
-                onClick={toggleHelpModal}
-            >
-                <div className="helpButtonInner">
-                    <FontAwesomeIcon icon="fa-regular fa-circle-question" />
-                </div>
-            </button>
+            <ActionButton
+                actionFunction={toggleHelpModal}
+                icon="fa-question"
+                label="Open help modal"
+                className="footerButton"
+                innerClassName="footerButtonInner"
+            />
 
             <Modali.Modal {...helpModal}>
                 <p className="helpContent">

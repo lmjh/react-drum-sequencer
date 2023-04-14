@@ -15,6 +15,7 @@ const SettingsContextProvider = (props) => {
     const tempo = useRef(90);
     const analyser = useRef();
     const [isMobile, setIsMobile] = useState(window.innerWidth < 576);
+    const [darkMode, setDarkMode] = useState(false);
 
     // declare functions to toggle global play, pause and mute settings
     const togglePlayPause = useCallback(() => {
@@ -40,8 +41,12 @@ const SettingsContextProvider = (props) => {
         isGlobalMuted ? setIsGlobalMuted(false) : setIsGlobalMuted(true);
     }, [isGlobalMuted]);
 
+    const toggleDarkMode = useCallback(() => {
+        darkMode ? setDarkMode(false) : setDarkMode(true);
+    }, [darkMode]);
+
     useEffect(() => {
-        // set isMobile boolean to true if window width < 576px 
+        // set isMobile boolean to true if window width < 576px
         const checkIsMobile = () => setIsMobile(window.innerWidth < 576);
         // add event listener to update isMobile on window resize
         window.addEventListener("resize", checkIsMobile);
@@ -50,6 +55,12 @@ const SettingsContextProvider = (props) => {
             window.removeEventListener("resize", checkIsMobile);
         };
     }, []);
+
+    useEffect(() => {
+        document.documentElement.attributes["data-theme"].value = darkMode
+            ? "dark"
+            : "light";
+    }, [darkMode]);
 
     return (
         <SettingsContext.Provider
@@ -61,10 +72,12 @@ const SettingsContextProvider = (props) => {
                 tempo,
                 analyser,
                 isMobile,
+                darkMode,
                 setGlobalVolume,
                 togglePlayPause,
                 stopPlaying,
                 toggleGlobalMute,
+                toggleDarkMode,
             }}
         >
             {props.children}

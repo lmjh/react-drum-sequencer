@@ -1,6 +1,6 @@
 // import { Howler } from "howler";
 
-import React, { useRef, useEffect, useContext } from "react";
+import React, { useContext, useEffect, useMemo, useRef } from "react";
 import { SettingsContext } from "../contexts";
 
 /**
@@ -9,11 +9,15 @@ import { SettingsContext } from "../contexts";
  * developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Visualizations_with_Web_Audio_API
  */
 const Visualiser = () => {
-    const { isPlaying, analyser } = useContext(SettingsContext);
+    const { isPlaying, analyser, darkMode } = useContext(SettingsContext);
 
     const canvasRef = useRef(null);
     const containerRef = useRef(null);
     const getFrame = useRef(null);
+    const lineStlye = useMemo(
+        () => (darkMode ? "#27beff" : "#053e56"),
+        [darkMode]
+    );
 
     useEffect(() => {
         if (isPlaying) {
@@ -38,9 +42,9 @@ const Visualiser = () => {
                 getFrame.current = requestAnimationFrame(draw);
 
                 // configure visualiser style
-                context.fillStyle = "#27beff";
+                context.fillStyle = lineStlye;
                 context.lineWidth = 2;
-                context.strokeStyle = "#27beff";
+                context.strokeStyle = lineStlye;
 
                 // get data
                 analyser.current.getByteTimeDomainData(dataArray);
@@ -82,15 +86,15 @@ const Visualiser = () => {
             if (canvas.height != height) canvas.height = height;
 
             // configure visualiser style
-            context.fillStyle = "#27beff";
+            context.fillStyle = lineStlye;
             context.lineWidth = 2;
-            context.strokeStyle = "#27beff";
+            context.strokeStyle = lineStlye;
 
             // fill background and start line path
             context.clearRect(0, 0, width, height);
             context.beginPath();
 
-            // draw line across center of canvas 
+            // draw line across center of canvas
             context.moveTo(0, context.canvas.height / 2);
             context.lineTo(context.canvas.width, context.canvas.height / 2);
             context.stroke();
@@ -100,7 +104,7 @@ const Visualiser = () => {
             cancelAnimationFrame(getFrame.current);
             analyser.current.disconnect();
         };
-    }, [isPlaying]);
+    }, [isPlaying, darkMode]);
 
     return (
         <div className="visualiserContainer">

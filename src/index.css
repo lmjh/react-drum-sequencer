@@ -1,9 +1,85 @@
 @import url("https://fonts.googleapis.com/css2?family=Audiowide&display=swap");
 
-:root {
-    --blue: #27beff;
-    --red-transparent: rgba(147, 35, 35, 0.22);
-    --blue-transparent: rgba(39, 190, 255, 0.231);
+html[data-theme='dark'] {
+    --primary: #27beff;
+    --overlay-primary: rgba(39, 190, 255, 0.231);
+    --page-background-dark: #1a1a1a;
+    --page-background-light: #3a3a3a;
+    --text: #9a9a9a;
+    --footer-text: #bcbcbc;
+    --modal-text: #bcbcbc;
+    --modal-background: #202020;
+    --button-gradient-dark: #202020;
+    --button-gradient-light: #404040;
+    --button-gradient-dark-alt: #282828;
+    --button-gradient-light-alt: #393939;
+    --control-label: #27beff;
+    --control-label-text-shadow: 0 0 5px var(--primary);
+    --control-shadow: #101010;
+    --control-inactive-background: #101010;
+    --control-inactive-text: #191919;
+    --control-inactive-text-shadow: 0 0 2px #212121;
+    --icon-glow: drop-shadow(0 0 5px var(--primary));
+    --screen-background: #00262c;
+    --screen-outer-shadow: #151515;
+    --screen-inner-shadow: #050505;
+    --screen-gradient-outer: #000801;
+    --screen-background-lines: rgba(71, 212, 255, 0.05);
+    --screen-text: #27beff;
+    --screen-text-shadow: 0 0 5px var(--primary);
+    --beat-light-active: #f28007;
+    --beat-light-inactive-background: #1a1a1a;
+    --beat-light-inactive-shadow-dark: #0f0f0f;
+    --beat-light-inactive-shadow-light: #262626;
+    --volume-inactive-shadow-dark: #0f0f0f;
+    --volume-inactive-shadow-light: #262626;
+    --trackbar-background: #191919;
+    --track-toggle-highlight-dark: #451414;
+    --track-toggle-highlight-light: #831c1c;
+    --track-toggle-shadow: 0px 5px 9px var(--control-shadow);
+    --title-text: var(--primary);
+    --title-text-shadow: 0 0 5px var(--primary);
+}
+
+html[data-theme='light'] {
+    --primary: #f8333c;
+    --overlay-primary: #777;
+    --page-background-dark: #dcdcdc;
+    --page-background-light: #f8f8f8;
+    --text: #303030;
+    --footer-text: #202020;
+    --modal-text: #202020;
+    --modal-background: #dcdcdc;
+    --button-gradient-dark: #dcdcdc;
+    --button-gradient-light: #fcfcfc;
+    --button-gradient-dark-alt: #dfdfdf;
+    --button-gradient-light-alt: #f9f9f9;
+    --control-label: #202020;
+    --control-label-text-shadow: none;
+    --control-shadow: #707070;
+    --control-inactive-background: #d5d5d5;
+    --control-inactive-text: #d5d5d5;
+    --control-inactive-text-shadow: none;
+    --icon-glow: none;
+    --screen-background: #6cf6af;
+    --screen-outer-shadow: #707070;
+    --screen-inner-shadow: #808080;
+    --screen-gradient-outer: #9effd6;
+    --screen-background-lines: rgba(71, 212, 255, 0.4);
+    --screen-text: #053e56;
+    --screen-text-shadow: none;
+    --beat-light-active: #31ff9f;
+    --beat-light-inactive-background: #555;
+    --beat-light-inactive-shadow-dark: #222;
+    --beat-light-inactive-shadow-light: #6a6a6a;
+    --volume-inactive-shadow-dark: #0f0f0f;
+    --volume-inactive-shadow-light: #262626;
+    --trackbar-background: #4d4d4d;
+    --track-toggle-highlight-dark: #888;
+    --track-toggle-highlight-light: #d5d5d5;
+    --track-toggle-shadow: 0px 5px 9px #3c3c3c;
+    --title-text: rgba(49, 49, 49, 0.8);
+    --title-text-shadow: 0px 5px 5px #fff, 0 0 0 #000, 0px 5px 5px #fff;
 }
 
 html {
@@ -16,10 +92,10 @@ body {
         "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    color: #9a9a9a;
+    color: var(--text);
     display: flex;
     justify-content: center;
-    background: linear-gradient(0deg, #1a1a1a, #3a3a3a);
+    background: linear-gradient(0deg, var(--page-background-dark), var(--page-background-light));
     height: 100%;
     margin: 0;
     background-repeat: no-repeat;
@@ -60,15 +136,12 @@ code {
     grid-gap: 10px;
     align-items: center;
     justify-items: center;
-    border-top: 10px solid var(--red-transparent);
-    border-radius: 20px;
-    border-bottom: 10px solid var(--red-transparent);
     padding: 5px 0 10px;
 }
 
 .controlLabel {
     font-size: 12px;
-    color: var(--blue-transparent);
+    color: var(--overlay-primary);
     display: flex;
     flex-basis: 100%;
     align-items: center;
@@ -78,18 +151,18 @@ code {
 .controlLabel:before,
 .controlLabel:after {
     content: "";
-    background: var(--blue-transparent);
+    background: var(--overlay-primary);
     height: 3px;
     flex-grow: 1;
     margin: 0px 4px;
 }
 
 .controlLabel:before {
-    border-bottom-left-radius: 100%;
+    border-radius: 20px 0 0 20px;
 }
 
 .controlLabel:after {
-    border-bottom-right-radius: 100%;
+    border-radius: 0 20px 20px 0;
 }
 
 .buttonLabelContainer {
@@ -188,8 +261,8 @@ code {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    background: linear-gradient(0deg, #202020, #404040);
-    box-shadow: 0px 5px 9px #101010;
+    background: linear-gradient(0deg, var(--button-gradient-dark), var(--button-gradient-light));
+    box-shadow: 0px 5px 9px var(--control-shadow);
 }
 
 .controlPanelToggleInner {
@@ -201,14 +274,14 @@ code {
     align-items: center;
     border-radius: 25%;
     border: 0px;
-    background: linear-gradient(180deg, #282828, #393939);
-    color: var(--blue);
+    background: linear-gradient(180deg, var(--button-gradient-dark-alt), var(--button-gradient-light-alt));
+    color: var(--control-label);
     font-family: "Audiowide";
     font-size: 1.5rem;
 }
 
 .svg-inline--fa {
-    filter: drop-shadow(0 0 5px var(--blue));
+    filter: var(--icon-glow);
 }
 
 .controlPanelButton {
@@ -223,8 +296,8 @@ code {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    background: linear-gradient(0deg, #202020, #404040);
-    box-shadow: 0px 5px 9px #101010;
+    background: linear-gradient(0deg, var(--button-gradient-dark), var(--button-gradient-light));
+    box-shadow: 0px 5px 9px var(--control-shadow);
 }
 
 .controlPanelButtonInner {
@@ -236,10 +309,10 @@ code {
     align-items: center;
     border-radius: 25%;
     border: 0px;
-    background: linear-gradient(180deg, #282828, #393939);
-    color: var(--blue);
+    background: linear-gradient(180deg, var(--button-gradient-dark-alt), var(--button-gradient-light-alt));
+    color: var(--control-label);
     font-family: "Audiowide";
-    text-shadow: 0 0 5px var(--blue);
+    text-shadow: var(--control-label-text-shadow);
     font-size: 1.5rem;
 }
 
@@ -267,14 +340,13 @@ code {
 }
 
 .volumeInactive {
-    background-color: #101010;
-    box-shadow: inset 0 -2px 5px #0f0f0f, inset 0 2px 5px #262626,
-        0px 2px #101010;
+    background-color: var(--control-inactive-background);
+    box-shadow: inset 0 -2px 5px var(--volume-inactive-shadow-dark), inset 0 2px 5px var(--volume-inactive-shadow-light);
 }
 
 .volumeActive {
-    background-color: var(--blue);
-    box-shadow: 0 0 5px var(--blue);
+    background-color: var(--primary);
+    box-shadow: 0 0 5px var(--primary);
 }
 
 .volumeTwenty {
@@ -304,8 +376,8 @@ code {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    background: linear-gradient(0deg, #202020, #404040);
-    box-shadow: 0px 5px 9px #101010;
+    background: linear-gradient(0deg, var(--button-gradient-dark), var(--button-gradient-light));
+    box-shadow: 0px 5px 9px var(--control-shadow);
 }
 
 .volumeButtonInner {
@@ -317,10 +389,10 @@ code {
     align-items: center;
     border-radius: 50%;
     border: 0px;
-    background: linear-gradient(180deg, #202020, #404040);
-    color: var(--blue);
+    background: linear-gradient(180deg, var(--button-gradient-dark), var(--button-gradient-light));
+    color: var(--control-label);
     font-family: "Audiowide";
-    text-shadow: 0 0 5px var(--blue);
+    text-shadow: var(--control-label-text-shadow);
     font-size: 1rem;
 }
 
@@ -331,13 +403,12 @@ code {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    color: #666666;
     border-radius: 50%;
     border: 0px;
-    background: linear-gradient(180deg, #202020, #404040);
-    color: #191919;
+    background: linear-gradient(180deg, var(--button-gradient-dark), var(--button-gradient-light));
+    color: var(--control-inactive-text);
     font-family: "Audiowide";
-    text-shadow: 0 0 2px #212121;
+    text-shadow: var(--control-inactive-text-shadow);
     font-size: 1rem;
 }
 
@@ -360,9 +431,9 @@ code {
     align-items: center;
     min-height: 30px;
     height: 60%;
-    background: linear-gradient(#404040, #202020);
+    background: linear-gradient(var(--button-gradient-light), var(--button-gradient-dark));
     border-radius: 8px;
-    box-shadow: 0 2px 3px #151515;
+    box-shadow: 0 2px 3px var(--screen-outer-shadow);
     padding: 3px;
     margin: 5px 0;
 }
@@ -371,13 +442,13 @@ code {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #00262c;
+    background: var(--screen-background);
     width: 100%;
     height: 100%;
     border-radius: 5px;
-    box-shadow: inset 0 0 15px #050505;
-    color: var(--blue);
-    text-shadow: 0 0 5px var(--blue);
+    box-shadow: inset 0 0 15px var(--screen-inner-shadow);
+    color: var(--screen-text);
+    text-shadow: var(--screen-text-shadow);
 }
 
 .tempoButton {
@@ -391,8 +462,8 @@ code {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    background: linear-gradient(0deg, #202020, #404040);
-    box-shadow: 0px 5px 9px #101010;
+    background: linear-gradient(0deg, var(--button-gradient-dark), var(--button-gradient-light));
+    box-shadow: 0px 5px 9px var(--control-shadow);
 }
 
 .tempoButtonInner {
@@ -404,10 +475,10 @@ code {
     align-items: center;
     border-radius: 50%;
     border: 0px;
-    background: linear-gradient(180deg, #202020, #404040);
-    color: var(--blue);
+    background: linear-gradient(180deg, var(--button-gradient-dark), var(--button-gradient-light));
+    color: var(--control-label);
     font-family: "Audiowide";
-    text-shadow: 0 0 5px var(--blue);
+    text-shadow: var(--control-label-text-shadow);
     font-size: 0.8rem;
 }
 
@@ -418,13 +489,12 @@ code {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    color: #666666;
     border-radius: 50%;
     border: 0px;
-    background: linear-gradient(180deg, #202020, #404040);
-    color: #191919;
+    background: linear-gradient(180deg, var(--button-gradient-dark), var(--button-gradient-light));
+    color: var(--control-inactive-text);
     font-family: "Audiowide";
-    text-shadow: 0 0 2px #212121;
+    text-shadow: var(--control-inactive-text-shadow);
     font-size: 0.8rem;
 }
 
@@ -435,12 +505,11 @@ code {
     height: 100%;
     border-radius: 25px;
     background-image: linear-gradient(
-            rgba(71, 212, 255, 0.05) 1px,
+            var(--screen-background-lines) 1px,
             transparent 1px
         ),
-        linear-gradient(to right, rgba(71, 212, 255, 0.05) 1px, transparent 1px);
+        linear-gradient(to right, var(--screen-background-lines) 1px, transparent 1px);
     background-size: 10px 10px;
-    background-color: rgba(71, 212, 255, 0);
 }
 
 .visualiserContainer {
@@ -448,9 +517,9 @@ code {
     justify-content: center;
     align-items: center;
     height: 100px;
-    background: linear-gradient(#404040, #202020);
+    background: linear-gradient(var(--button-gradient-light), var(--button-gradient-dark));
     border-radius: 28px;
-    box-shadow: 0 3px 5px #151515;
+    box-shadow: 0 3px 5px var(--screen-outer-shadow);
     padding: 5px;
     margin: 5px 0;
     width: 95%;
@@ -461,12 +530,12 @@ code {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(0deg, #000801 0%, #00262c 47%, #100b00 100%);
+    background: linear-gradient(0deg, var(--screen-gradient-outer) 0%, var(--screen-background) 47%, var(--screen-gradient-outer) 100%);
     width: 100%;
     height: 100%;
     border-radius: 25px;
     overflow: hidden;
-    box-shadow: inset 0 0 15px #050505;
+    box-shadow: inset 0 0 15px var(--screen-inner-shadow);
 }
 /* BEAT BAR STYLES */
 
@@ -475,15 +544,15 @@ code {
     grid-template-columns: repeat(8, 1fr);
     grid-column: 1/3;
     grid-row-gap: 20px;
-    border: 5px solid var(--blue-transparent);
+    border: 5px solid var(--overlay-primary);
     border-radius: 10px;
     padding: 10px 0;
     background: linear-gradient(
-                var(--blue-transparent),
-                var(--blue-transparent)
+                var(--overlay-primary),
+                var(--overlay-primary)
             )
             center/100% 2px no-repeat,
-        linear-gradient(var(--blue-transparent), var(--blue-transparent))
+        linear-gradient(var(--overlay-primary), var(--overlay-primary))
             center/2px 100% no-repeat;
 }
 
@@ -492,7 +561,7 @@ code {
     justify-content: space-around;
     align-items: center;
     flex-direction: column;
-    color: var(--blue-transparent);
+    color: var(--overlay-primary);
     min-height: 40px;
 }
 
@@ -500,16 +569,16 @@ code {
     width: 15px;
     height: 15px;
     border-radius: 50%;
-    background-color: var(--blue);
-    box-shadow: 0px 0px 6px var(--blue);
+    background-color: var(--primary);
+    box-shadow: 0px 0px 15px 1px var(--primary);
 }
 
 .beatLightInactive {
     width: 15px;
     height: 15px;
     border-radius: 50%;
-    background: #1a1a1a;
-    box-shadow: inset 0 -2px 5px #0f0f0f, inset 0 2px 5px #262626;
+    background: var(--beat-light-inactive-background);
+    box-shadow: inset 0 -2px 5px var(--beat-light-inactive-shadow-dark), inset 0 2px 5px var(--beat-light-inactive-shadow-light);
 }
 
 /* TRACK BAR STYLES */
@@ -520,12 +589,12 @@ code {
     grid-template-columns: repeat(8, 1fr);
     grid-gap: 3px;
     align-items: center;
-    background: #191919;
+    background: var(--trackbar-background);
     border-radius: 15px;
     padding: 4px;
 }
 
-.trackToggleDark {
+.trackToggle {
     cursor: pointer;
     padding: 0;
     aspect-ratio: 1;
@@ -535,24 +604,23 @@ code {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    background: linear-gradient(0deg, #202020, #404040);
-    box-shadow: 0px 5px 9px #101010;
+    background: linear-gradient(0deg, var(--button-gradient-dark), var(--button-gradient-light));
+    box-shadow: var(--track-toggle-shadow);
 }
 
-.trackToggleInnerDark {
+.trackToggleInner {
     aspect-ratio: 1;
     width: 75%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    color: #666666;
     border-radius: 50%;
     border: 0px;
-    background: linear-gradient(180deg, #202020, #404040);
+    background: linear-gradient(180deg, var(--button-gradient-dark), var(--button-gradient-light));
 }
 
-.trackToggleRed {
+.trackToggleHighlight {
     cursor: pointer;
     padding: 0;
     aspect-ratio: 1;
@@ -562,34 +630,33 @@ code {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    background: linear-gradient(180deg, #831c1c, #451414);
-    box-shadow: 0px 5px 9px #101010;
+    background: linear-gradient(180deg, var(--track-toggle-highlight-light), var(--track-toggle-highlight-dark));
+    box-shadow: var(--track-toggle-shadow);
 }
 
-.trackToggleInnerRed {
+.trackToggleInnerHighlight {
     aspect-ratio: 1;
     width: 75%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    color: #666666;
     border-radius: 50%;
     border: 0px;
-    background: linear-gradient(180deg, #451414, #831c1c);
+    background: linear-gradient(180deg, var(--track-toggle-highlight-dark), var(--track-toggle-highlight-light));
 }
 
 .beatActive {
-    background-color: #ffad27;
-    box-shadow: 0px 0px 4px #ffad27;
+    background-color: var(--beat-light-active);
+    box-shadow: 0px 0px 15px 1px var(--beat-light-active);
     height: 100%;
     width: 100%;
     border-radius: 50%;
 }
 
 .beatCurrent {
-    background-color: var(--blue);
-    box-shadow: 0px 0px 4px var(--blue);
+    background-color: var(--primary);
+    box-shadow: 0px 0px 15px 1px var(--primary);
     height: 100%;
     width: 100%;
     border-radius: 50%;
@@ -597,10 +664,10 @@ code {
 
 .beatInactive {
     border-radius: 7px;
-    background: #191919;
-    box-shadow: inset 0 -2px 5px #0f0f0f, inset 0 2px 5px #262626;
-    height: 30%;
-    width: 30%;
+    background: var(--beat-light-inactive-background);
+    box-shadow: inset 0 -2px 5px var(--beat-light-inactive-shadow-dark), inset 0 2px 5px var(--beat-light-inactive-shadow-light);
+    height: 37%;
+    width: 37%;
     border-radius: 50%;
 }
 
@@ -608,7 +675,8 @@ code {
     grid-column: 2 / 3;
     margin: 0;
     border: 0; /* override default styles */
-    border-top: 5px solid var(--red-transparent);
+    border-top: 5px solid var(--overlay-primary);
+    border-radius: 20px;
 }
 
 /* TRACK CONTROL PANEL STYLES */
@@ -625,8 +693,8 @@ code {
 .trackName {
     grid-column-start: 1;
     grid-column-end: 5;
-    background: linear-gradient(#404040, #202020);
-    box-shadow: 0 2px 3px #151515;
+    background: linear-gradient(var(--button-gradient-light), var(--button-gradient-dark));
+    box-shadow: 0 2px 3px var(--screen-outer-shadow);
     padding: 3px;
     border-radius: 5px;
 }
@@ -634,16 +702,16 @@ code {
 .trackNameInner {
     font-size: 0.8rem;
     margin: 0;
-    background: #00262c;
+    background: var(--screen-background);
     width: 100%;
     height: 100%;
     border-radius: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: inset 0 0 15px #050505;
-    color: var(--blue);
-    text-shadow: 0 0 5px var(--blue);
+    box-shadow: inset 0 0 15px var(--screen-inner-shadow);
+    color: var(--screen-text);
+    text-shadow: var(--screen-text-shadow);
 }
 
 .trackVolumeControl {
@@ -662,8 +730,8 @@ code {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background: linear-gradient(0deg, #202020, #404040);
-    box-shadow: 0px 3px 6px #101010;
+    background: linear-gradient(0deg, var(--button-gradient-dark), var(--button-gradient-light));
+    box-shadow: 0px 3px 6px var(--control-shadow);
 }
 
 .patternShortcutInner {
@@ -672,10 +740,10 @@ code {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    background: linear-gradient(180deg, #282828, #393939);
-    color: var(--blue);
+    background: linear-gradient(180deg, var(--button-gradient-dark-alt), var(--button-gradient-light-alt));
+    color: var(--control-label);
     font-family: "Audiowide";
-    text-shadow: 0 0 5px var(--blue);
+    text-shadow: var(--control-label-text-shadow);
     font-size: 12px;
     border-radius: 2px;
 }
@@ -706,13 +774,14 @@ code {
 }
 
 .title {
-    color: var(--blue);
-    text-shadow: 0 0 5px var(--blue);
+    font-size: 2.5rem;
+    color: var(--title-text);
+    text-shadow: var(--title-text-shadow);
     text-align: center;
 }
 
 .logo {
-    filter: drop-shadow(0 0 5px var(--blue));
+    filter: var(--icon-glow);
     max-height: 2rem;
 }
 
@@ -722,34 +791,75 @@ footer {
     display: flex;
     justify-content: center;
     width: 100%;
-    margin-top: 30px;
+    margin-top: 15px;
     font-family: "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
         "Droid Sans", "Helvetica Neue", sans-serif;
-    color: #bcbcbc;
+    color: var(--footer-text);
     line-height: 1.4rem;
 }
 
 .footerContainer {
     display: flex;
+    justify-content: space-between;
+    width: 90%;
+    padding: 10px 0;
+    border-top: 5px solid var(--overlay-primary);
+}
+
+.footerTextContainer {
+    display: flex;
     flex-direction: column;
     justify-content: start;
-    width: 90%;
-    padding: 20px 0;
-    border-top: 5px solid var(--red-transparent);
 }
 
 footer a {
-    color: var(--blue);
+    color: var(--primary);
     text-decoration: none;
 }
 
 footer a:hover {
-    color: var(--blue);
+    color: var(--primary);
     text-decoration: underline;
 }
 
 .footerSpacer {
     display: none;
+}
+
+/* FOOTER BUTTON STYLES */
+
+.footerControls {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    min-width: 80px;
+    grid-gap: 5px;
+}
+
+.footerButton {
+    cursor: pointer;
+    padding: 0;
+    aspect-ratio: 1;
+    border-radius: 25%;
+    border: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background: linear-gradient(0deg, var(--button-gradient-dark), var(--button-gradient-light));
+    box-shadow: var(--track-toggle-shadow);
+}
+
+.footerButtonInner {
+    aspect-ratio: 1;
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 50%;
+    border: 0px;
+    background: linear-gradient(180deg, var(--button-gradient-dark), var(--button-gradient-light));
+    color: var(--control-label)
 }
 
 /* HELP BUTTON STYLES */
@@ -764,8 +874,8 @@ footer a:hover {
     border-top-left-radius: 10px;
     cursor: pointer;
     border: 0;
-    background: linear-gradient(0deg, #202020, #404040);
-    box-shadow: 0px 5px 9px #101010;
+    background: linear-gradient(0deg, var(--button-gradient-dark), var(--button-gradient-light));
+    box-shadow: 0px 5px 9px var(--control-shadow);
     padding: 5px;
     border-top-right-radius: 10px;
 }
@@ -775,9 +885,9 @@ footer a:hover {
     justify-content: space-between;
     align-items: center;
     border-top-left-radius: 10px;
-    background: linear-gradient(180deg, #202020, #404040);
-    color: var(--blue);
-    text-shadow: 0 0 5px var(--blue);
+    background: linear-gradient(180deg, var(--button-gradient-dark), var(--button-gradient-light));
+    color: var(--primary);
+    text-shadow: 0 0 5px var(--primary);
     font-size: 1.5rem;
     padding: 10px;
     border-top-right-radius: 10px;
@@ -792,12 +902,12 @@ footer a:hover {
     max-width: 80%;
     max-height: 200px;
     border-radius: 15px;
-    box-shadow: 0 5px 5px #151515;
+    box-shadow: 0 5px 5px var(--screen-outer-shadow);
 }
 
 .modali {
     background-color: transparent !important;
-    color: #bcbcbc
+    color: var(--modal-text)
 }
 
 .modali-body {
@@ -817,7 +927,7 @@ footer a:hover {
 
 .modali-content,
 .modali-body {
-    background-color: #202020 !important;
+    background-color: var(--modal-background) !important;
 }
 
 .modali-content,
@@ -826,13 +936,17 @@ footer a:hover {
 }
 
 .modali-close-button {
-    background-color: #202020 !important;
-    color: var(--blue) !important;
+    background-color: var(--modal-background) !important;
+    color: var(--primary) !important;
     opacity: 0.6 !important;
 }
 
 .modali-close-button:hover {
     opacity: 1 !important;
+}
+
+.modali-open {
+    padding-right: 0px!important;
 }
 
 @media (min-width: 576px) {
@@ -926,17 +1040,16 @@ footer a:hover {
         margin: 0;
     }
 
-    .footerContainer {
+    .footerTextContainer {
         flex-direction: row;
         align-items: center;
-        width: 90%;
     }
 
     .footerSpacer {
         display: block;
         margin: 0 10px;
         border-radius: 100%;
-        background-color: var(--red-transparent);
+        background-color: var(--overlay-primary);
         width: 10px;
         height: 10px;
     }
@@ -948,12 +1061,6 @@ footer a:hover {
         align-items: center;
         justify-content: space-evenly;
         margin: 0;
-    }
-
-    .title {
-        color: var(--blue);
-        text-shadow: 0 0 5px var(--blue);
-        text-align: center;
     }
 
     .logo {
@@ -988,7 +1095,6 @@ footer a:hover {
 
     .trackBar {
         grid-template-columns: repeat(16, 1fr);
-        background: #191919;
         border-radius: 12px;
         padding: 3px;
         align-self: center;
@@ -999,13 +1105,13 @@ footer a:hover {
         grid-gap: 5px;
         border-radius: 20px;
         background: linear-gradient(
-                    var(--blue-transparent),
-                    var(--blue-transparent)
+                    var(--overlay-primary),
+                    var(--overlay-primary)
                 )
                 25%/2px 100% no-repeat,
-            linear-gradient(var(--blue-transparent), var(--blue-transparent))
+            linear-gradient(var(--overlay-primary), var(--overlay-primary))
                 50%/2px 100% no-repeat,
-            linear-gradient(var(--blue-transparent), var(--blue-transparent))
+            linear-gradient(var(--overlay-primary), var(--overlay-primary))
                 75%/2px 100% no-repeat;
     }
 
