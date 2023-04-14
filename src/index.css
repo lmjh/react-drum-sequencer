@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Audiowide&display=swap");
 
-:root {
+html[data-theme='dark'] {
     --primary: #27beff;
     --overlay-primary: rgba(39, 190, 255, 0.231);
     --overlay-secondary: rgba(147, 35, 35, 0.22);
@@ -14,15 +14,21 @@
     --button-gradient-light: #404040;
     --button-gradient-dark-alt: #282828;
     --button-gradient-light-alt: #393939;
+    --control-label: #27beff;
+    --control-label-text-shadow: 0 0 5px var(--primary);
     --control-shadow: #101010;
     --control-inactive-background: #101010;
     --control-inactive-text: #191919;
-    --control-inactive-text-shadow: #212121;
+    --control-inactive-text-shadow: 0 0 2px #212121;
+    --icon-glow: drop-shadow(0 0 5px var(--primary));
     --screen-background: #00262c;
     --screen-outer-shadow: #151515;
     --screen-inner-shadow: #050505;
     --screen-gradient-outer: #000801;
-    --beat-light-active: #ffad27;
+    --screen-background-lines: rgba(71, 212, 255, 0.05);
+    --screen-text: #27beff;
+    --screen-text-shadow: 0 0 5px var(--primary);
+    --beat-light-active: #f28007;
     --beat-light-inactive-background: #1a1a1a;
     --beat-light-inactive-shadow-dark: #0f0f0f;
     --beat-light-inactive-shadow-light: #262626;
@@ -31,6 +37,55 @@
     --trackbar-background: #191919;
     --track-toggle-highlight-dark: #451414;
     --track-toggle-highlight-light: #831c1c;
+    --track-toggle-shadow: 0px 5px 9px var(--control-shadow);
+    --title-text: var(--primary);
+    --title-background: none;
+    --title-background-clip: none;
+    --title-text-shadow: 0 0 5px var(--primary);
+}
+
+html[data-theme='light'] {
+    --primary: #f8333c;
+    --overlay-primary: #777;
+    --overlay-secondary: #777;
+    --page-background-dark: #dcdcdc;
+    --page-background-light: #f8f8f8;
+    --text: #303030;
+    --footer-text: #202020;
+    --modal-text: #202020;
+    --modal-background: #dcdcdc;
+    --button-gradient-dark: #dcdcdc;
+    --button-gradient-light: #fcfcfc;
+    --button-gradient-dark-alt: #dfdfdf;
+    --button-gradient-light-alt: #f9f9f9;
+    --control-label: #202020;
+    --control-label-text-shadow: none;
+    --control-shadow: #707070;
+    --control-inactive-background: #d5d5d5;
+    --control-inactive-text: #d5d5d5;
+    --control-inactive-text-shadow: none;
+    --icon-glow: none;
+    --screen-background: #6cf6af;
+    --screen-outer-shadow: #707070;
+    --screen-inner-shadow: #808080;
+    --screen-gradient-outer: #9effd6;
+    --screen-background-lines: rgba(71, 212, 255, 0.4);
+    --screen-text: #053e56;
+    --screen-text-shadow: none;
+    --beat-light-active: #31ff9f;
+    --beat-light-inactive-background: #555;
+    --beat-light-inactive-shadow-dark: #222;
+    --beat-light-inactive-shadow-light: #6a6a6a;
+    --volume-inactive-shadow-dark: #0f0f0f;
+    --volume-inactive-shadow-light: #262626;
+    --trackbar-background: #4d4d4d;
+    --track-toggle-highlight-dark: #888;
+    --track-toggle-highlight-light: #d5d5d5;
+    --track-toggle-shadow: 0px 5px 9px #3c3c3c;
+    --title-text: transparent;
+    --title-background: #252525;
+    --title-background-clip: text;
+    --title-text-shadow: 0px 5px 5px rgba(255, 255, 255, 0.3);
 }
 
 html {
@@ -87,9 +142,9 @@ code {
     grid-gap: 10px;
     align-items: center;
     justify-items: center;
-    border-top: 10px solid var(--overlay-secondary);
+    /* border-top: 10px solid var(--overlay-secondary);
     border-radius: 20px;
-    border-bottom: 10px solid var(--overlay-secondary);
+    border-bottom: 10px solid var(--overlay-secondary); */
     padding: 5px 0 10px;
 }
 
@@ -112,11 +167,11 @@ code {
 }
 
 .controlLabel:before {
-    border-bottom-left-radius: 100%;
+    border-radius: 20px 0 0 20px;
 }
 
 .controlLabel:after {
-    border-bottom-right-radius: 100%;
+    border-radius: 0 20px 20px 0;
 }
 
 .buttonLabelContainer {
@@ -229,13 +284,13 @@ code {
     border-radius: 25%;
     border: 0px;
     background: linear-gradient(180deg, var(--button-gradient-dark-alt), var(--button-gradient-light-alt));
-    color: var(--primary);
+    color: var(--control-label);
     font-family: "Audiowide";
     font-size: 1.5rem;
 }
 
 .svg-inline--fa {
-    filter: drop-shadow(0 0 5px var(--primary));
+    filter: var(--icon-glow);
 }
 
 .controlPanelButton {
@@ -264,9 +319,9 @@ code {
     border-radius: 25%;
     border: 0px;
     background: linear-gradient(180deg, var(--button-gradient-dark-alt), var(--button-gradient-light-alt));
-    color: var(--primary);
+    color: var(--control-label);
     font-family: "Audiowide";
-    text-shadow: 0 0 5px var(--primary);
+    text-shadow: var(--control-label-text-shadow);
     font-size: 1.5rem;
 }
 
@@ -295,8 +350,7 @@ code {
 
 .volumeInactive {
     background-color: var(--control-inactive-background);
-    box-shadow: inset 0 -2px 5px var(--volume-inactive-shadow-dark), inset 0 2px 5px var(--volume-inactive-shadow-light),
-        0px 2px var(--control-shadow);
+    box-shadow: inset 0 -2px 5px var(--volume-inactive-shadow-dark), inset 0 2px 5px var(--volume-inactive-shadow-light);
 }
 
 .volumeActive {
@@ -345,9 +399,9 @@ code {
     border-radius: 50%;
     border: 0px;
     background: linear-gradient(180deg, var(--button-gradient-dark), var(--button-gradient-light));
-    color: var(--primary);
+    color: var(--control-label);
     font-family: "Audiowide";
-    text-shadow: 0 0 5px var(--primary);
+    text-shadow: var(--control-label-text-shadow);
     font-size: 1rem;
 }
 
@@ -363,7 +417,7 @@ code {
     background: linear-gradient(180deg, var(--button-gradient-dark), var(--button-gradient-light));
     color: var(--control-inactive-text);
     font-family: "Audiowide";
-    text-shadow: 0 0 2px var(--control-inactive-text-shadow);
+    text-shadow: var(--control-inactive-text-shadow);
     font-size: 1rem;
 }
 
@@ -402,8 +456,8 @@ code {
     height: 100%;
     border-radius: 5px;
     box-shadow: inset 0 0 15px var(--screen-inner-shadow);
-    color: var(--primary);
-    text-shadow: 0 0 5px var(--primary);
+    color: var(--screen-text);
+    text-shadow: var(--screen-text-shadow);
 }
 
 .tempoButton {
@@ -431,9 +485,9 @@ code {
     border-radius: 50%;
     border: 0px;
     background: linear-gradient(180deg, var(--button-gradient-dark), var(--button-gradient-light));
-    color: var(--primary);
+    color: var(--control-label);
     font-family: "Audiowide";
-    text-shadow: 0 0 5px var(--primary);
+    text-shadow: var(--control-label-text-shadow);
     font-size: 0.8rem;
 }
 
@@ -449,7 +503,7 @@ code {
     background: linear-gradient(180deg, var(--button-gradient-dark), var(--button-gradient-light));
     color: var(--control-inactive-text);
     font-family: "Audiowide";
-    text-shadow: 0 0 2px var(--control-inactive-text-shadow);
+    text-shadow: var(--control-inactive-text-shadow);
     font-size: 0.8rem;
 }
 
@@ -460,12 +514,11 @@ code {
     height: 100%;
     border-radius: 25px;
     background-image: linear-gradient(
-            rgba(71, 212, 255, 0.05) 1px,
+            var(--screen-background-lines) 1px,
             transparent 1px
         ),
-        linear-gradient(to right, rgba(71, 212, 255, 0.05) 1px, transparent 1px);
+        linear-gradient(to right, var(--screen-background-lines) 1px, transparent 1px);
     background-size: 10px 10px;
-    background-color: rgba(71, 212, 255, 0);
 }
 
 .visualiserContainer {
@@ -526,7 +579,7 @@ code {
     height: 15px;
     border-radius: 50%;
     background-color: var(--primary);
-    box-shadow: 0px 0px 6px var(--primary);
+    box-shadow: 0px 0px 15px 1px var(--primary);
 }
 
 .beatLightInactive {
@@ -561,7 +614,7 @@ code {
     justify-content: space-around;
     align-items: center;
     background: linear-gradient(0deg, var(--button-gradient-dark), var(--button-gradient-light));
-    box-shadow: 0px 5px 9px var(--control-shadow);
+    box-shadow: var(--track-toggle-shadow);
 }
 
 .trackToggleInner {
@@ -587,7 +640,7 @@ code {
     justify-content: space-around;
     align-items: center;
     background: linear-gradient(180deg, var(--track-toggle-highlight-light), var(--track-toggle-highlight-dark));
-    box-shadow: 0px 5px 9px var(--control-shadow);
+    box-shadow: var(--track-toggle-shadow);
 }
 
 .trackToggleInnerHighlight {
@@ -604,7 +657,7 @@ code {
 
 .beatActive {
     background-color: var(--beat-light-active);
-    box-shadow: 0px 0px 4px var(--beat-light-active);
+    box-shadow: 0px 0px 15px 1px var(--beat-light-active);
     height: 100%;
     width: 100%;
     border-radius: 50%;
@@ -612,7 +665,7 @@ code {
 
 .beatCurrent {
     background-color: var(--primary);
-    box-shadow: 0px 0px 4px var(--primary);
+    box-shadow: 0px 0px 15px 1px var(--primary);
     height: 100%;
     width: 100%;
     border-radius: 50%;
@@ -632,6 +685,7 @@ code {
     margin: 0;
     border: 0; /* override default styles */
     border-top: 5px solid var(--overlay-secondary);
+    border-radius: 20px;
 }
 
 /* TRACK CONTROL PANEL STYLES */
@@ -665,8 +719,8 @@ code {
     align-items: center;
     justify-content: center;
     box-shadow: inset 0 0 15px var(--screen-inner-shadow);
-    color: var(--primary);
-    text-shadow: 0 0 5px var(--primary);
+    color: var(--screen-text);
+    text-shadow: var(--screen-text-shadow);
 }
 
 .trackVolumeControl {
@@ -696,9 +750,9 @@ code {
     flex-direction: column;
     justify-content: space-around;
     background: linear-gradient(180deg, var(--button-gradient-dark-alt), var(--button-gradient-light-alt));
-    color: var(--primary);
+    color: var(--control-label);
     font-family: "Audiowide";
-    text-shadow: 0 0 5px var(--primary);
+    text-shadow: var(--control-label-text-shadow);
     font-size: 12px;
     border-radius: 2px;
 }
@@ -729,13 +783,16 @@ code {
 }
 
 .title {
-    color: var(--primary);
-    text-shadow: 0 0 5px var(--primary);
+    font-size: 2.5rem;
+    color: var(--title-text);
+    background: var(--title-background);
+    background-clip: var(--title-background-clip);
+    text-shadow: var(--title-text-shadow);
     text-align: center;
 }
 
 .logo {
-    filter: drop-shadow(0 0 5px var(--primary));
+    filter: var(--icon-glow);
     max-height: 2rem;
 }
 
@@ -858,6 +915,7 @@ footer a:hover {
     opacity: 1 !important;
 }
 
+
 @media (min-width: 576px) {
     .appMainContainer {
         display: grid;
@@ -971,12 +1029,6 @@ footer a:hover {
         align-items: center;
         justify-content: space-evenly;
         margin: 0;
-    }
-
-    .title {
-        color: var(--primary);
-        text-shadow: 0 0 5px var(--primary);
-        text-align: center;
     }
 
     .logo {
