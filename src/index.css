@@ -670,8 +670,8 @@ code {
     border-radius: 7px;
     background: var(--beat-light-inactive-background);
     box-shadow: inset 0 -2px 5px var(--beat-light-inactive-shadow-dark), inset 0 2px 5px var(--beat-light-inactive-shadow-light);
-    height: 30%;
-    width: 30%;
+    height: 37%;
+    width: 37%;
     border-radius: 50%;
 }
 
